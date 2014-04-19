@@ -1,7 +1,7 @@
 /**
  * Created by Mike on 19/4/2014.
  */
-public class Bomb {
+public class Bomb implements ICoordinates {
     private int x;
     private int y;
 
@@ -22,7 +22,6 @@ public class Bomb {
     }
 
     public Bomb(int x, int y) {
-
         this.x = x;
         this.y = y;
     }

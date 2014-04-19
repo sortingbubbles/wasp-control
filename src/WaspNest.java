@@ -1,7 +1,7 @@
 /**
  * Created by Mike on 19/4/2014.
  */
-public class WaspNest {
+public class WaspNest implements ICoordinates {
     private int x;
     private int y;
     private int wasps;
@@ -43,4 +43,13 @@ public class WaspNest {
     public void setWasps(int wasps) {
         this.wasps = wasps;
     }
+
+    public void killWasps(int killedWasps) {
+        wasps -= killedWasps;
+
+        if (wasps < 0) {
+            wasps = 0;
+        }
+    }
+
 }
