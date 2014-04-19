@@ -23,4 +23,18 @@ public class MapController {
     private double distance(ICoordinates point1, ICoordinates point2) {
         return distance(point1.getX(), point1.getY(), point2.getX(), point2.getY());
     }
+
+    private double getBombNestKills(WaspNest waspNest, Bomb bomb) {
+        return waspNest.getWasps() * (maxDist / (20 * distance(waspNest, bomb) + 0.00001));
+    }
+
+    public double getBombTotalKills(Bomb bomb) {
+        double kills = 0;
+        for (WaspNest waspNest : map) {
+            kills += getBombNestKills(waspNest, bomb);
+            waspNest.killWasps((int)Math.round(kills));
+        }
+
+        return kills;
+    }
 }
