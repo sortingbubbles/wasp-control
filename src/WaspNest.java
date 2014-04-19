@@ -7,14 +7,6 @@ public class WaspNest implements ICoordinates {
     private int wasps;
 
     public WaspNest(int x, int y, int wasps) {
-        if (x < 0 || x > 100) {
-            throw new IllegalArgumentException("x is out of range. Valid range is 0 ... 100");
-        }
-
-        if (y < 0 || y > 100) {
-            throw new IllegalArgumentException("y is out of range. Valid range is 0 ... 100");
-        }
-
         this.x = x;
         this.y = y;
         this.wasps = wasps;
