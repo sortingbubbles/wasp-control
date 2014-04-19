@@ -18,6 +18,11 @@ public class Main {
         mapController.addWaspNet(new WaspNest(84, 4, 945));
         mapController.addWaspNet(new WaspNest(34, 23, 967));
 
-        System.out.println(mapController.getMaxDist());
+        double total = 0;
+        total += mapController.getBombTotalKills(new Bomb(10, 10));
+        total += mapController.getBombTotalKills(new Bomb(20, 20));
+        total += mapController.getBombTotalKills(new Bomb(30, 30));
+
+        System.out.println(total);
     }
 }
