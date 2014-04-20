@@ -31,33 +31,36 @@ public class Main {
             bomb1.setX(x1);
             for (int y1 = 0; y1 < 100; y1++) {
                 bomb1.setY(y1);
+                double totalBomb1 = mapController.getBombTotalKills(bomb1);
+                mapController.saveMap(1);
                 for (int x2 = 0; x2 < 100; x2++) {
                     bomb2.setX(x2);
                     for (int y2 = 0; y2 < 100; y2++) {
                         bomb2.setY(y2);
+                        double totalBomb2 = totalBomb1 + mapController.getBombTotalKills(bomb2);
+                        mapController.saveMap(2);
                         writeToFile("currPosition.txt", x1 + "," + y1 + "," + x2 + "," + y2 + ",0,0", false);
                         for (int x3 = 0; x3 < 100; x3++) {
                             bomb3.setX(x3);
                             for (int y3 = 0; y3 < 100; y3++) {
                                 bomb3.setY(y3);
 
-                                double total = 0;
-                                total += mapController.getBombTotalKills(bomb1);
-                                total += mapController.getBombTotalKills(bomb2);
-                                total += mapController.getBombTotalKills(bomb3);
+                                double totalBomb3 = totalBomb2 + mapController.getBombTotalKills(bomb3);
 
-                                if (total > best) {
-                                    System.out.println(new StringBuilder().append("Found new best position: (").append(bomb1.getX()).append(", ").append(bomb1.getY()).append("), (").append(bomb2.getX()).append(", ").append(bomb2.getY()).append("), (").append(bomb3.getX()).append(", ").append(bomb3.getY()).append("): ").append(total).toString());
-                                    writeToFile("bestSoFar.txt", new StringBuilder().append("(").append(bomb1.getX()).append(", ").append(bomb1.getY()).append("), (").append(bomb2.getX()).append(", ").append(bomb2.getY()).append("), (").append(bomb3.getX()).append(", ").append(bomb3.getY()).append("): ").append(total).toString(), false);
-                                    best = total;
+                                if (totalBomb3 > best) {
+                                    System.out.println(new StringBuilder().append("Found new best position: (").append(bomb1.getX()).append(", ").append(bomb1.getY()).append("), (").append(bomb2.getX()).append(", ").append(bomb2.getY()).append("), (").append(bomb3.getX()).append(", ").append(bomb3.getY()).append("): ").append(totalBomb3).toString());
+                                    writeToFile("bestSoFar.txt", new StringBuilder().append("(").append(bomb1.getX()).append(", ").append(bomb1.getY()).append("), (").append(bomb2.getX()).append(", ").append(bomb2.getY()).append("), (").append(bomb3.getX()).append(", ").append(bomb3.getY()).append("): ").append(totalBomb3).toString(), false);
+                                    best = totalBomb3;
                                 }
 
-                                mapController.restoreMap();
+                                mapController.restoreMap(2);
                                 //System.out.println(new StringBuilder().append(bomb1.getX()).append(",").append(bomb1.getY()).append(",").append(bomb2.getX()).append(",").append(bomb2.getY()).append(",").append(bomb3.getX()).append(",").append(bomb3.getY()).append(",").append(total).toString());
                             }
                         }
+                        mapController.restoreMap(1);
                     }
                 }
+                mapController.restoreMap(0);
                 System.out.println("y1 = " + y1 + " time:" + System.currentTimeMillis());
             }
             System.out.println("x1 = " + x1 + " time:" + System.currentTimeMillis());

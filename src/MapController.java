@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MapController {
     /**
@@ -9,7 +10,7 @@ public class MapController {
     /**
      * Αντίγραφο του πίνακα με την τοποθεσία των σφηκοφωλιών (χρησιμοποιείται για την επαναφορά)
      */
-    private ArrayList<WaspNest> mapCopy;
+    private HashMap<Integer, ArrayList<WaspNest>> mapCopies;
 
     private int totalNests;
 
@@ -25,7 +26,8 @@ public class MapController {
      */
     public MapController(int maxX, int maxY) {
         map = new ArrayList<>();
-        mapCopy = new ArrayList<>();
+        mapCopies = new HashMap<>();
+        mapCopies.put(0, new ArrayList<WaspNest>());
         maxDist = distance(0, 0, maxX, maxY);
         totalNests = 0;
     }
@@ -36,7 +38,7 @@ public class MapController {
      */
     public void addWaspNet(WaspNest waspNest) {
         map.add(waspNest);
-        mapCopy.add(new WaspNest(waspNest));
+        mapCopies.get(0).add(new WaspNest(waspNest));
         totalNests++;
     }
 
@@ -94,12 +96,21 @@ public class MapController {
         return kills;
     }
 
+    public void saveMap(int checkpoint) {
+        ArrayList<WaspNest> tempMap = new ArrayList<>();
+        for (int i = 0; i < totalNests; i++) {
+            tempMap.add(new WaspNest(map.get(i)));
+        }
+        mapCopies.put(checkpoint, tempMap);
+    }
+
     /**
      * Επιστρέφει τον αριθμό των ζωντανών σφηκών στην αρχική τους κατάσταση
      */
-    public void restoreMap() {
+    public void restoreMap(int checkpoint) {
+        ArrayList<WaspNest> tempMap = mapCopies.get(checkpoint);
         for (int i = 0; i < totalNests; i++) {
-            map.get(i).setWasps(mapCopy.get(i).getWasps());
+            map.get(i).setWasps(tempMap.get(i).getWasps());
         }
     }
 }
