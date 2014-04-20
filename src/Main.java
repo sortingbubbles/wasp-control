@@ -20,22 +20,51 @@ public class Main {
         mapController.addWaspNet(new WaspNest(84, 4, 945));
         mapController.addWaspNet(new WaspNest(34, 23, 967));
 
+        int x1Args = 0;
+        int y1Args = 0;
+        int x2Args = 0;
+        int y2Args = 0;
+        double best = 0;
+
+        if (args.length == 5) {
+            x1Args = Integer.parseInt(args[0]);
+            y1Args = Integer.parseInt(args[1]);
+            x2Args = Integer.parseInt(args[2]);
+            y2Args = Integer.parseInt(args[3]);
+            best = Double.parseDouble(args[4]);
+        }
+
         System.out.println("begin " + System.currentTimeMillis());
 
-        double best = 0;
         Bomb bomb1 = new Bomb(0, 0);
         Bomb bomb2 = new Bomb(0, 0);
         Bomb bomb3 = new Bomb(0, 0);
 
         for (int x1 = 0; x1 < 100; x1++) {
+            if (x1Args > x1) {
+                x1 = x1Args;
+                x1Args = 0;
+            }
             bomb1.setX(x1);
             for (int y1 = 0; y1 < 100; y1++) {
+                if (y1Args > y1) {
+                    y1 = y1Args;
+                    y1Args = 0;
+                }
                 bomb1.setY(y1);
                 double totalBomb1 = mapController.getBombTotalKills(bomb1);
                 mapController.saveMap(1);
                 for (int x2 = 0; x2 < 100; x2++) {
+                    if (x2Args > x2) {
+                        x2 = x2Args;
+                        x2Args = 0;
+                    }
                     bomb2.setX(x2);
                     for (int y2 = 0; y2 < 100; y2++) {
+                        if (y2Args > y2) {
+                            y2 = y2Args;
+                            y2Args = 0;
+                        }
                         bomb2.setY(y2);
                         double totalBomb2 = totalBomb1 + mapController.getBombTotalKills(bomb2);
                         mapController.saveMap(2);
