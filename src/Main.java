@@ -23,18 +23,23 @@ public class Main {
         System.out.println("begin " + System.currentTimeMillis());
 
         double best = 0;
+        Bomb bomb1 = new Bomb(0, 0);
+        Bomb bomb2 = new Bomb(0, 0);
+        Bomb bomb3 = new Bomb(0, 0);
 
         for (int x1 = 0; x1 < 100; x1++) {
+            bomb1.setX(x1);
             for (int y1 = 0; y1 < 100; y1++) {
-                Bomb bomb1 = new Bomb(x1, y1);
+                bomb1.setY(y1);
                 for (int x2 = 0; x2 < 100; x2++) {
+                    bomb2.setX(x2);
                     for (int y2 = 0; y2 < 100; y2++) {
-                        Bomb bomb2 = new Bomb(x2, y2);
+                        bomb2.setY(y2);
                         writeToFile("currPosition.txt", x1 + "," + y1 + "," + x2 + "," + y2 + ",0,0", false);
                         for (int x3 = 0; x3 < 100; x3++) {
+                            bomb3.setX(x3);
                             for (int y3 = 0; y3 < 100; y3++) {
-
-                                Bomb bomb3 = new Bomb(x3, y3);
+                                bomb3.setY(y3);
 
                                 double total = 0;
                                 total += mapController.getBombTotalKills(bomb1);

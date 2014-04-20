@@ -11,6 +11,8 @@ public class MapController {
      */
     private ArrayList<WaspNest> mapCopy;
 
+    private int totalNests;
+
     /**
      * Μέγιστη απόσταση μεταξύ δύο σημείων στον χάρτη
      */
@@ -25,6 +27,7 @@ public class MapController {
         map = new ArrayList<>();
         mapCopy = new ArrayList<>();
         maxDist = distance(0, 0, maxX, maxY);
+        totalNests = 0;
     }
 
     /**
@@ -34,6 +37,7 @@ public class MapController {
     public void addWaspNet(WaspNest waspNest) {
         map.add(waspNest);
         mapCopy.add(new WaspNest(waspNest));
+        totalNests++;
     }
 
     /**
@@ -81,7 +85,8 @@ public class MapController {
      */
     public double getBombTotalKills(Bomb bomb) {
         double kills = 0;
-        for (WaspNest waspNest : map) {
+        for (int i = 0; i < totalNests; i++) {
+            WaspNest waspNest = map.get(i);
             kills += getBombNestKills(waspNest, bomb);
             waspNest.killWasps((int)Math.round(kills));
         }
@@ -93,7 +98,7 @@ public class MapController {
      * Επιστρέφει τον αριθμό των ζωντανών σφηκών στην αρχική τους κατάσταση
      */
     public void restoreMap() {
-        for (int i = 0; i < map.size(); i++) {
+        for (int i = 0; i < totalNests; i++) {
             map.get(i).setWasps(mapCopy.get(i).getWasps());
         }
     }
