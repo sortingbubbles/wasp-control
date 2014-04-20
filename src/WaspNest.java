@@ -9,6 +9,12 @@ public class WaspNest implements ICoordinates {
         this.wasps = wasps;
     }
 
+    public WaspNest(WaspNest waspNest) {
+        this.x = waspNest.x;
+        this.y = waspNest.y;
+        this.wasps = waspNest.wasps;
+    }
+
     public int getX() {
         return x;
     }
