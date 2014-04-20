@@ -1,6 +1,3 @@
-/**
- * Created by Mike on 19/4/2014.
- */
 public class Bomb implements ICoordinates {
     private int x;
     private int y;

@@ -1,6 +1,3 @@
-/**
- * Created by Mike on 19/4/2014.
- */
 public class WaspNest implements ICoordinates {
     private int x;
     private int y;
@@ -36,6 +33,11 @@ public class WaspNest implements ICoordinates {
         this.wasps = wasps;
     }
 
+    /**
+     * Αφαιρεί το {@code killedWasps} από τον αριθμό των σφηκών που έχει η φωλιά.
+     * Εάν το αποτέλεσμα είναι μικρότερο του 0 τότε η φωλιά έχει 0 σφήκες.
+     * @param killedWasps Ο αριθμός των σφηκών που θα αφαιρεθούν
+     */
     public void killWasps(int killedWasps) {
         wasps -= killedWasps;
 
