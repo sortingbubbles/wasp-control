@@ -22,7 +22,8 @@ public class MapController {
      * @param maxY Το μέγιστο ύψος του χάρτη
      */
     public MapController(int maxX, int maxY) {
-        map = new ArrayList<WaspNest>();
+        map = new ArrayList<>();
+        mapCopy = new ArrayList<>();
         maxDist = distance(0, 0, maxX, maxY);
     }
 
@@ -32,7 +33,7 @@ public class MapController {
      */
     public void addWaspNet(WaspNest waspNest) {
         map.add(waspNest);
-        mapCopy.add(waspNest);
+        mapCopy.add(new WaspNest(waspNest));
     }
 
     /**
@@ -64,7 +65,13 @@ public class MapController {
      * @return Τον αριθμό των σφηκών που θα πεθάνουν
      */
     private double getBombNestKills(WaspNest waspNest, Bomb bomb) {
-        return waspNest.getWasps() * (maxDist / (20 * distance(waspNest, bomb) + 0.00001));
+        double kills = waspNest.getWasps() * (maxDist / (20 * distance(waspNest, bomb) + 0.00001));
+
+        if (kills >= waspNest.getWasps()) {
+            return waspNest.getWasps();
+        } else {
+            return kills;
+        }
     }
 
     /**
