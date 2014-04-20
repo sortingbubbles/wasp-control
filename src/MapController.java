@@ -7,6 +7,11 @@ public class MapController {
     private ArrayList<WaspNest> map;
 
     /**
+     * Αντίγραφο του πίνακα με την τοποθεσία των σφηκοφωλιών (χρησιμοποιείται για την επαναφορά)
+     */
+    private ArrayList<WaspNest> mapCopy;
+
+    /**
      * Μέγιστη απόσταση μεταξύ δύο σημείων στον χάρτη
      */
     private double maxDist;
@@ -27,6 +32,7 @@ public class MapController {
      */
     public void addWaspNet(WaspNest waspNest) {
         map.add(waspNest);
+        mapCopy.add(waspNest);
     }
 
     /**
@@ -74,5 +80,14 @@ public class MapController {
         }
 
         return kills;
+    }
+
+    /**
+     * Επιστρέφει τον αριθμό των ζωντανών σφηκών στην αρχική τους κατάσταση
+     */
+    public void restoreMap() {
+        for (int i = 0; i < map.size(); i++) {
+            map.get(i).setWasps(mapCopy.get(i).getWasps());
+        }
     }
 }
