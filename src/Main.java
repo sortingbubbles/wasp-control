@@ -40,13 +40,13 @@ public class Main {
         Bomb bomb2 = new Bomb(0, 0);
         Bomb bomb3 = new Bomb(0, 0);
 
-        for (int x1 = 0; x1 < 100; x1++) {
+        for (int x1 = 0; x1 <= 100; x1++) {
             if (x1Args > x1) {
                 x1 = x1Args;
                 x1Args = 0;
             }
             bomb1.setX(x1);
-            for (int y1 = 0; y1 < 100; y1++) {
+            for (int y1 = 0; y1 <= 100; y1++) {
                 if (y1Args > y1) {
                     y1 = y1Args;
                     y1Args = 0;
@@ -54,13 +54,14 @@ public class Main {
                 bomb1.setY(y1);
                 double totalBomb1 = mapController.getBombTotalKills(bomb1);
                 mapController.saveMap(1);
-                for (int x2 = 0; x2 < 100; x2++) {
+                writeToFile("currPosition.txt", x1 + "," + y1 + ",0,0,0,0", false);
+                for (int x2 = 0; x2 <= 100; x2++) {
                     if (x2Args > x2) {
                         x2 = x2Args;
                         x2Args = 0;
                     }
                     bomb2.setX(x2);
-                    for (int y2 = 0; y2 < 100; y2++) {
+                    for (int y2 = 0; y2 <= 100; y2++) {
                         if (y2Args > y2) {
                             y2 = y2Args;
                             y2Args = 0;
@@ -68,10 +69,9 @@ public class Main {
                         bomb2.setY(y2);
                         double totalBomb2 = totalBomb1 + mapController.getBombTotalKills(bomb2);
                         mapController.saveMap(2);
-                        writeToFile("currPosition.txt", x1 + "," + y1 + "," + x2 + "," + y2 + ",0,0", false);
-                        for (int x3 = 0; x3 < 100; x3++) {
+                        for (int x3 = 0; x3 <= 100; x3++) {
                             bomb3.setX(x3);
-                            for (int y3 = 0; y3 < 100; y3++) {
+                            for (int y3 = 0; y3 <= 100; y3++) {
                                 bomb3.setY(y3);
 
                                 double totalBomb3 = totalBomb2 + mapController.getBombTotalKills(bomb3);
@@ -90,9 +90,9 @@ public class Main {
                     }
                 }
                 mapController.restoreMap(0);
-                System.out.println("y1 = " + y1 + " time:" + System.currentTimeMillis());
+                System.out.println("y1 = " + y1 + " time: " + System.currentTimeMillis());
             }
-            System.out.println("x1 = " + x1 + " time:" + System.currentTimeMillis());
+            System.out.println("x1 = " + x1 + " time: " + System.currentTimeMillis());
         }
     }
 
