@@ -16,6 +16,8 @@ public class MapController {
 
     private double[][][][] distanceCache;
 
+    private int[][] waspStates;
+
     /**
      * Μέγιστη απόσταση μεταξύ δύο σημείων στον χάρτη
      */
@@ -111,21 +113,22 @@ public class MapController {
         return kills;
     }
 
+    public void initSave(int totalCheckpoints) {
+        waspStates = new int[totalCheckpoints][map.size()];
+    }
+
     public void saveMap(int checkpoint) {
-        ArrayList<WaspNest> tempMap = new ArrayList<>();
         for (int i = 0; i < totalNests; i++) {
-            tempMap.add(new WaspNest(map.get(i)));
+            waspStates[checkpoint][i] = map.get(i).getWasps();
         }
-        mapCopies.put(checkpoint, tempMap);
     }
 
     /**
      * Επιστρέφει τον αριθμό των ζωντανών σφηκών στην αρχική τους κατάσταση
      */
     public void restoreMap(int checkpoint) {
-        ArrayList<WaspNest> tempMap = mapCopies.get(checkpoint);
         for (int i = 0; i < totalNests; i++) {
-            map.get(i).setWasps(tempMap.get(i).getWasps());
+            map.get(i).setWasps(waspStates[checkpoint][i]);
         }
     }
 }

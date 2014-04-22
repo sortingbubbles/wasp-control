@@ -33,12 +33,14 @@ public class Main {
             y2Args = Integer.parseInt(args[3]);
             best = Double.parseDouble(args[4]);
         }
-
-        System.out.println("begin " + System.currentTimeMillis());
+        long lastTimey1 = System.currentTimeMillis();
+        long lastTimex1 = System.currentTimeMillis();
+        System.out.println("begin " + lastTimey1);
 
         Bomb bomb1 = new Bomb(0, 0);
         Bomb bomb2 = new Bomb(0, 0);
         Bomb bomb3 = new Bomb(0, 0);
+        mapController.initSave(3);
 
         for (int x1 = 0; x1 <= 100; x1++) {
             if (x1Args > x1) {
@@ -90,9 +92,13 @@ public class Main {
                     }
                 }
                 mapController.restoreMap(0);
-                System.out.println("y1 = " + y1 + " time: " + System.currentTimeMillis());
+                long execTime = System.currentTimeMillis();
+                System.out.println("y1 = " + y1 + " time: " + execTime + " (" + (execTime - lastTimey1) + ")");
+                lastTimey1 = execTime;
             }
-            System.out.println("x1 = " + x1 + " time: " + System.currentTimeMillis());
+            long execTime = System.currentTimeMillis();
+            System.out.println("x1 = " + x1 + " time: " + execTime + " (" + (execTime - lastTimex1) + ")");
+            lastTimex1 = execTime;
         }
     }
 
