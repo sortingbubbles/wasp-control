@@ -41,7 +41,7 @@ public class Main {
         Bomb bomb2 = new Bomb(0, 0);
         Bomb bomb3 = new Bomb(0, 0);
         mapController.initSave(3);
-
+        mapController.saveMap(0);
         for (int x1 = 0; x1 <= 100; x1++) {
             if (x1Args > x1) {
                 x1 = x1Args;
