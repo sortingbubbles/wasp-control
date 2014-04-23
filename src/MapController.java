@@ -14,7 +14,7 @@ public class MapController {
 
     private int totalNests;
 
-    private double[][][][] distanceCache;
+
 
     private int[][] waspStates;
 
@@ -32,17 +32,8 @@ public class MapController {
         map = new ArrayList<>();
         mapCopies = new HashMap<>();
         mapCopies.put(0, new ArrayList<WaspNest>());
-        distanceCache = new double[maxX+1][maxY+1][maxX+1][maxY+1];
-        for (int x1 = 0; x1 <= 100; x1++) {
-            for (int y1 = 0; y1 <= 100; y1++) {
-                for (int x2 = 0; x2 <= 100; x2++) {
-                    for (int y2 = 0; y2 <= 100; y2++) {
-                        distanceCache[x1][y1][x2][y2] = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-                    }
-                }
-            }
-        }
-        maxDist = distance(0, 0, maxX, maxY);
+
+        maxDist = Distance.getDistance(0, 0, maxX, maxY);
         totalNests = 0;
     }
 
@@ -56,30 +47,7 @@ public class MapController {
         totalNests++;
     }
 
-    /**
-     * Υπολογίζει την απόσταση μεταξύ δύο σημείων
-     * @param x1 Η τετμημένη του πρώτου σημείου
-     * @param y1 Η τεταγμένη του πρώτου σημείου
-     * @param x2 Η τετμημένη του δεύτερου σημείου
-     * @param y2 Η τεταγμένη του δεύτερου σημείου
-     * @return Την απόσταση των δύο σημείων
-     */
-    private double distance(int x1, int y1, int x2, int y2) {
-//        if (distanceCache[x1][y1][x2][y2] == 0) {
-//            distanceCache[x1][y1][x2][y2] = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
-//        }
-        return distanceCache[x1][y1][x2][y2];
-    }
 
-    /**
-     * Υπολογίζει την απόσταση μεταξύ δύο σημείων
-     * @param point1 Το πρώτο σημείο
-     * @param point2 Το δεύτερο σημείο
-     * @return Την απόσταση των σημείων {@code point1} με {@code point2}
-     */
-    private double distance(ICoordinates point1, ICoordinates point2) {
-        return distance(point1.getX(), point1.getY(), point2.getX(), point2.getY());
-    }
 
     /**
      * Υπολογίζει πόσες σφήκες θα σκοτωθούν από την φωλιά {@code waspNest} αν σκάσει η βόμβα {@code bomb}
@@ -88,7 +56,7 @@ public class MapController {
      * @return Τον αριθμό των σφηκών που θα πεθάνουν
      */
     private double getBombNestKills(WaspNest waspNest, Bomb bomb) {
-        double kills = waspNest.getWasps() * (maxDist / (20 * distance(waspNest, bomb) + 0.00001));
+        double kills = waspNest.getWasps() * (maxDist / (20 * Distance.getDistance(waspNest, bomb) + 0.00001));
 
         if (kills >= waspNest.getWasps()) {
             return waspNest.getWasps();
