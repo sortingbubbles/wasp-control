@@ -1,10 +1,8 @@
-/**
- * Created by Mike on 22/4/2014.
- */
 public class Distance {
     private static double[][][][] distanceCache;
 
     public static void initDistance(int maxX, int maxY) {
+        System.out.println("Calculating distances...");
         distanceCache = new double[maxX+1][maxY+1][maxX+1][maxY+1];
         for (int x1 = 0; x1 <= 100; x1++) {
             for (int y1 = 0; y1 <= 100; y1++) {
@@ -15,6 +13,7 @@ public class Distance {
                 }
             }
         }
+        System.out.println("Distances calculated.");
     }
 
     /**

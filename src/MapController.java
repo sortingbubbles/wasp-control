@@ -23,12 +23,17 @@ public class MapController {
      */
     private double maxDist;
 
+    private int maxX;
+    private int maxY;
+
     /**
      * Δημιουργία ελεγκτή του χάρτη
      * @param maxX Το μέγιστο πλάτος του χάρτη
      * @param maxY Το μέγιστο ύψος του χάρτη
      */
     public MapController(int maxX, int maxY) {
+        this.maxX = maxX;
+        this.maxY = maxY;
         map = new ArrayList<>();
         mapCopies = new HashMap<>();
         mapCopies.put(0, new ArrayList<WaspNest>());
@@ -89,6 +94,22 @@ public class MapController {
         for (int i = 0; i < totalNests; i++) {
             waspStates[checkpoint][i] = map.get(i).getWasps();
         }
+    }
+
+    public int getMaxX() {
+        return maxX;
+    }
+
+    public void setMaxX(int maxX) {
+        this.maxX = maxX;
+    }
+
+    public int getMaxY() {
+        return maxY;
+    }
+
+    public void setMaxY(int maxY) {
+        this.maxY = maxY;
     }
 
     /**
