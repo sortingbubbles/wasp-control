@@ -327,23 +327,29 @@
 \hyphenation{op-tical net-works semi-conduc-tor}
 %\usepackage[Greek,Latin]{ucharclasses}
 %\usepackage{xltxtra}
-\usepackage{hyperref}
-\usepackage{polyglossia} % replacement of babel
-\usepackage{csquotes}
-\setmainlanguage{greek}
-\setotherlanguages{english}
+\usepackage{hyperref} % χρησιμοποιείται για αυτόματο linkification
+\usepackage{polyglossia} % χρησιμοποιείται για καλύτερη υποστήριξη των Ελληνικών
+\usepackage{csquotes} % χρησιμοποιείται από το BibLaTeX
+\usepackage[backend=biber, style=ieee]{biblatex} %χρησιμοποιείται για τις αναφορές
+\usepackage{xpatch} % χρησιμοποιείται για το διώρθομα ενός bug στυλ αναφορών
+\setmainlanguage{greek} % κύρια γλώσσα 
+\setotherlanguages{english} % δευτερεύουσα γλώσσα
 
-\usepackage[
-    backend=biber,
-    style=ieee
-]{biblatex}
-%\usepackage{url}
-\addbibresource{bibliography.bib}
-% Fonts%
-\newfontfamily\greekfont[Script=Greek]{Times New Roman}
+% να μην εμφανίζονται κενές παρενθέσεις όταν δεν υπάρχει ημερομηνία στην αναφορά
+\xpatchbibdriver{online}
+  {\printtext[parens]{\usebibmacro{date}}}
+  {\iffieldundef{year}
+    {}
+    {\printtext[parens]{\usebibmacro{date}}}}
+  {}
+  {\typeout{There was an error patching biblatex-ieee (specifically, ieee.bbx's @online driver)}}
+  
+\addbibresource{bibliography.bib} % όρισμα αρχειού βιβλιογραφίας που θα χρησιμοποιηθεί
+
+% Fonts
+\newfontfamily\greekfont[Script=Greek]{Times New Roman} % work-around για bug του polyglossia
 \setmainfont[Kerning=On,Mapping=tex-text]{Times New Roman} % roman font
-\setsansfont[Kerning=On,Mapping=tex-text]{Times New Roman} % sans font
-
+\renewcommand*{\bibfont}{\footnotesize} % αλλαγή του μεγέθους των αναφορών
 \begin{document}
 %
 % paper title
@@ -426,7 +432,7 @@ The abstract goes here.
 \input{bioEnv}
 \input{methodologies}
 
- 
+
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
 % For figures, \caption should occur after the \includegraphics.
@@ -552,7 +558,7 @@ The authors would like to thank...
 %\bibliography{IEEEabrv,bibliography}
 \begingroup
 \raggedright
-\sloppy
+%\sloppy
 \printbibliography
 \endgroup
 %
