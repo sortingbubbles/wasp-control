@@ -81,9 +81,8 @@
 \usepackage{csquotes} % χρησιμοποιείται από το BibLaTeX
 \usepackage[backend=biber, style=ieee]{biblatex} %χρησιμοποιείται για τις αναφορές
 \usepackage{xpatch} % χρησιμοποιείται για το διόρθωμα ενός bug στυλ αναφορών
-\setmainlanguage{greek} % κύρια γλώσσα 
+\setmainlanguage[numerals=arabic]{greek} % κύρια γλώσσα
 \setotherlanguages{english} % δευτερεύουσα γλώσσα
-
 % να μην εμφανίζονται κενές παρενθέσεις όταν δεν υπάρχει ημερομηνία στην αναφορά
 \xpatchbibdriver{online}
   {\printtext[parens]{\usebibmacro{date}}}
@@ -92,7 +91,7 @@
     {\printtext[parens]{\usebibmacro{date}}}}
   {}
   {\typeout{There was an error patching biblatex-ieee (specifically, ieee.bbx's @online driver)}}
-  
+
 \addbibresource{bibliography.bib} % όρισμα αρχειού βιβλιογραφίας που θα χρησιμοποιηθεί
 
 % Fonts
