@@ -7,24 +7,8 @@ public class MainJGAP {
     public static EvolutionMonitor m_monitor;
     private static final int MAX_ALLOWED_EVOLUTIONS = 1000;
 
-    public static void exterminate(MapController mapController, boolean a_doMonitor) throws Exception {
-        // Start with a DefaultConfiguration, which comes setup with the
-        // most common settings.
-        // -------------------------------------------------------------
-        Configuration conf = new DefaultConfiguration();
-        // Care that the fittest individual of the current population is
-        // always taken to the next generation.
-        // Consider: With that, the pop. size may exceed its original
-        // size by one sometimes!
-        // -------------------------------------------------------------
-        conf.setPreservFittestIndividual(true);
-        conf.setKeepPopulationSizeConstant(false);
-        // Set the fitness function we want to use, which is our
-        // MinimizingMakeChangeFitnessFunction. We construct it with
-        // the target amount of change passed in to this method.
-        // ---------------------------------------------------------
-        FitnessFunction myFunc = new WaspFitnessFunction(mapController);
-        conf.setFitnessFunction(myFunc);
+    public static double exterminate(Configuration conf, int populationSize, int maxEvolutions, MapController mapController, boolean a_doMonitor) throws Exception {
+
         if (a_doMonitor) {
             // Turn on monitoring/auditing of evolution progress.
             // --------------------------------------------------
@@ -58,7 +42,7 @@ public class MainJGAP {
         // finding the answer), but the longer it will take to evolve
         // the population (which could be seen as bad).
         // ------------------------------------------------------------
-        conf.setPopulationSize(200);
+        conf.setPopulationSize(populationSize);
 
         // Now we initialize the population randomly, anyway (as an example only)!
         // If you want to load previous results from file, remove the next line!
@@ -69,7 +53,7 @@ public class MainJGAP {
         // is going to be, we just evolve the max number of times.
         // ---------------------------------------------------------------
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < MAX_ALLOWED_EVOLUTIONS; i++) {
+        for (int i = 0; i < maxEvolutions; i++) {
 //            if (!uniqueChromosomes(population.getPopulation())) {
 //                throw new RuntimeException("Invalid state in generation "+i);
 //            }
@@ -80,19 +64,42 @@ public class MainJGAP {
             }
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("Total evolution time: " + (endTime - startTime)
-                + " ms");
+//        System.out.println("Total evolution time: " + (endTime - startTime)
+//                + " ms");
 
         // -----------------------------------
         IChromosome bestSolutionSoFar = population.getFittestChromosome();
-        System.out.println("The best solution has a fitness value of " +
-                bestSolutionSoFar.getFitnessValue());
-        bestSolutionSoFar.setFitnessValueDirectly(-1);
-        System.out.println("It contains the following: ");
-        System.out.println("\t" + WaspFitnessFunction.getBombFromChromosome(bestSolutionSoFar, 0));
-        System.out.println("\t" + WaspFitnessFunction.getBombFromChromosome(bestSolutionSoFar, 1));
-        System.out.println("\t" + WaspFitnessFunction.getBombFromChromosome(bestSolutionSoFar, 2));
+//        System.out.println("The best solution has a fitness value of " +
+//                bestSolutionSoFar.getFitnessValue());
+//        bestSolutionSoFar.setFitnessValueDirectly(-1);
+//        System.out.println("It contains the following: ");
+//        System.out.println("\t" + WaspFitnessFunction.getBombFromChromosome(bestSolutionSoFar, 0));
+//        System.out.println("\t" + WaspFitnessFunction.getBombFromChromosome(bestSolutionSoFar, 1));
+//        System.out.println("\t" + WaspFitnessFunction.getBombFromChromosome(bestSolutionSoFar, 2));
 
+        return bestSolutionSoFar.getFitnessValue();
+    }
+
+    public static Configuration getConfiguration(MapController mapController) throws InvalidConfigurationException {
+        // Start with a DefaultConfiguration, which comes setup with the
+        // most common settings.
+        // -------------------------------------------------------------
+        Configuration conf = new DefaultConfiguration();
+        // Care that the fittest individual of the current population is
+        // always taken to the next generation.
+        // Consider: With that, the pop. size may exceed its original
+        // size by one sometimes!
+        // -------------------------------------------------------------
+        conf.setPreservFittestIndividual(true);
+        conf.setKeepPopulationSizeConstant(false);
+        // Set the fitness function we want to use, which is our
+        // MinimizingMakeChangeFitnessFunction. We construct it with
+        // the target amount of change passed in to this method.
+        // ---------------------------------------------------------
+        FitnessFunction myFunc = new WaspFitnessFunction(mapController);
+        conf.setFitnessFunction(myFunc);
+
+        return conf;
     }
 
     public static void main(String[] args) throws Exception {
@@ -114,6 +121,20 @@ public class MainJGAP {
         mapController.initSave(1);
         mapController.saveMap(0);
 
-        exterminate(mapController, true);
+
+
+        double avg[] = new double[95];
+        for (int i = 5; i < 100; i++) {
+            double total = 0;
+            for (int j = 0; j < 100; j++) {
+                Configuration.reset();
+                total += exterminate(getConfiguration(mapController), i, 100, mapController, false);
+            }
+            avg[i-5] = total/100;
+            System.out.println(i + ": " + avg[i-5]);
+        }
+
+
+
     }
 }
