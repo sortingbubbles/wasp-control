@@ -1,6 +1,6 @@
 %% Creator: Inkscape 0.48.3.1, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'EvolutionaryCycle.pdf' (pdf, eps, ps)
+%% Accompanies image file 'EvolutionaryCycle5.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{453.54331055bp}%
+    \setlength{\unitlength}{126.4bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,14 +48,16 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.5)%
+  \begin{picture}(1,1.80379747)%
     \put(0,0){\includegraphics[width=\unitlength]{./figures/EvolutionaryCycle.pdf}}%
-    \put(0.50165017,0.38998684){\color[rgb]{0,0,0}\makebox(0,0)[b]{\footnotesize\smash{\shortstack[c]{Δεξαμενή \\ Ζευγαρώματος}}}}%
-    \put(0.10561056,0.38998684){\color[rgb]{0,0,0}\makebox(0,0)[b]{\footnotesize\smash{\shortstack[c]{Αρχικός \\ Πληθυσμός}}}}%
-    \put(0.89768977,0.40834322){\color[rgb]{0,0,0}\makebox(0,0)[b]{\footnotesize\smash{Απόγονος}}}%
-    \put(0.89768977,0.07831022){\color[rgb]{0,0,0}\makebox(0,0)[b]{\footnotesize\smash{Απόγονος}}}%
-    \put(0.62026403,0.36656766){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\scriptsize\smash{Διασταύρωση}}}%
-    \put(0.73429043,0.2549505){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\footnotesize\smash{Μετάλλαξη}}}%
-    \put(0.62706271,0.09653465){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\footnotesize\smash{Επιλογή}}}%
+    \put(0.29322848,1.6895614){\makebox(0,0)[lb]{\smash{Αρχικός}}}%
+    \put(0.25078165,1.61947151){\makebox(0,0)[lb]{\smash{Πληθυσμός}}}%
+    \put(0.27329557,1.22120695){\makebox(0,0)[lb]{\smash{Δεξαμενή}}}%
+    \put(0.20864431,1.15111711){\makebox(0,0)[lb]{\smash{Ζευγαρώματος}}}%
+    \put(0.27161139,0.64771773){\makebox(0,0)[lb]{\smash{Απόγονος}}}%
+    \put(0.27161139,0.10927282){\makebox(0,0)[lb]{\smash{Απόγονος}}}%
+    \put(0.01802342,0.94779427){\makebox(0,0)[lb]{\smash{Διασταύρωση}}}%
+    \put(0.07612215,0.40934937){\makebox(0,0)[lb]{\smash{Μετάλλαξη}}}%
+    \put(0.7721519,0.64771773){\makebox(0,0)[lb]{\smash{Επιλογή}}}%
   \end{picture}%
 \endgroup%
