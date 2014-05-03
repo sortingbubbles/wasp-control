@@ -1,7 +1,7 @@
 import org.jgap.*;
 import org.jgap.audit.EvolutionMonitor;
-import org.jgap.impl.DefaultConfiguration;
-import org.jgap.impl.IntegerGene;
+import org.jgap.event.EventManager;
+import org.jgap.impl.*;
 
 public class MainJGAP {
     public static EvolutionMonitor m_monitor;
@@ -80,11 +80,30 @@ public class MainJGAP {
         return bestSolutionSoFar.getFitnessValue();
     }
 
-    public static Configuration getConfiguration(MapController mapController) throws InvalidConfigurationException {
+    public static Configuration getConfiguration(MapController mapController, double crossoverRate, int mutationRate) throws InvalidConfigurationException {
         // Start with a DefaultConfiguration, which comes setup with the
         // most common settings.
         // -------------------------------------------------------------
-        Configuration conf = new DefaultConfiguration();
+        Configuration conf = new Configuration();
+        try {
+            conf.setBreeder(new GABreeder());
+            conf.setRandomGenerator(new StockRandomGenerator());
+            conf.setEventManager(new EventManager());
+            conf.setMinimumPopSizePercent(0);
+            //
+            conf.setSelectFromPrevGen(1.0d);
+            conf.setKeepPopulationSizeConstant(true);
+            conf.setFitnessEvaluator(new DefaultFitnessEvaluator());
+            conf.setChromosomePool(new ChromosomePool());
+            conf.addGeneticOperator(new CrossoverOperator(conf, crossoverRate));
+            conf.addGeneticOperator(new MutationOperator(conf, mutationRate));
+        }
+        catch (InvalidConfigurationException e) {
+            throw new RuntimeException(
+                    "Fatal error: DefaultConfiguration class could not use its "
+                            + "own stock configuration values. This should never happen. "
+                            + "Please report this as a bug to the JGAP team.");
+        }
         // Care that the fittest individual of the current population is
         // always taken to the next generation.
         // Consider: With that, the pop. size may exceed its original
@@ -121,20 +140,25 @@ public class MainJGAP {
         mapController.initSave(1);
         mapController.saveMap(0);
 
+        final int POPULATION_SIZE = 20;
+        final int SAMPLES = 1000;
+        final int MAX_EVOLUTIONS = 10;
 
-
-        double avg[] = new double[95];
-        for (int i = 5; i < 100; i++) {
+        double avg[] = new double[101];
+        for (int i = 1; i <= 100; i++) {
             double total = 0;
-            for (int j = 0; j < 100; j++) {
+            for (int j = 0; j < SAMPLES; j++) {
                 Configuration.reset();
-                total += exterminate(getConfiguration(mapController), i, 100, mapController, false);
+
+                Configuration conf = getConfiguration(mapController, i/100.0, 12);
+                BestChromosomesSelector bestChromsSelector = new BestChromosomesSelector(conf, 0.90d);
+                bestChromsSelector.setDoubletteChromosomesAllowed(true);
+                conf.addNaturalSelector(bestChromsSelector, false);
+
+                total += exterminate(conf, POPULATION_SIZE, MAX_EVOLUTIONS, mapController, false);
             }
-            avg[i-5] = total/100;
-            System.out.println(i + ": " + avg[i-5]);
+            avg[i] = total/SAMPLES;
+            System.out.println(i + "," + avg[i]);
         }
-
-
-
     }
 }
