@@ -104,4 +104,29 @@
 
 Στη μετάλλαξη (mutation) επιλέγεται τυχαία ένα bit από το χρωμόσωμα, και αυτό αντιστρέφεται (δηλαδή από $0$ γίνεται $1$, και από $1$ γίνεται $0$). Αυτός ο τελεστής πρέπει να έχει μικρή πιθανότητα να εφαρμοστεί (κοντά στο $1\%$), αλλιώς υπάρχει κίνδυνος η αναζήτηση να μετατραπεί σε τυχαία αναζήτηση. \cite{zotero-PNQJ3TKI}
 
-<ΣΧΗΜΑ mutation (?)>
+\begin{figure}[!t]
+    \centering
+    \begin{subtable}[b]{.4\linewidth}
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            1 & 0 & \cellcolor{gray!25}0 & 0\\
+            \hline
+        \end{tabular}
+        \caption{Πριν}
+        \label{fig_beforeMutation}
+    \end{subtable}
+    ~
+    \begin{subtable}[b]{.3\linewidth}
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            1 & 0 & \cellcolor{gray!25}1 & 0\\
+            \hline
+        \end{tabular}
+        \caption{Μετά}
+        \label{fig_afterMutation}
+    \end{subtable}
+    \caption{Μετάλλαξη ενός χρωμοσώματος}
+    \label{fig_mutation}
+\end{figure} 
