@@ -76,11 +76,13 @@
 \hyphenation{op-tical net-works semi-conduc-tor}
 %\usepackage[Greek,Latin]{ucharclasses}
 %\usepackage{xltxtra}
-\usepackage{hyperref} % χρησιμοποιείται για αυτόματο linkification
 \usepackage{polyglossia} % χρησιμοποιείται για καλύτερη υποστήριξη των Ελληνικών
 \usepackage{csquotes} % χρησιμοποιείται από το BibLaTeX
 \usepackage[backend=biber, style=ieee]{biblatex} %χρησιμοποιείται για τις αναφορές
 \usepackage{xpatch} % χρησιμοποιείται για το διόρθωμα ενός bug στυλ αναφορών
+\usepackage{pgfplots} % χρησιμοποιείται για τα γραφήματα
+\usepackage{hyperref} % χρησιμοποιείται για αυτόματο linkification
+\pgfplotsset{compat=1.10}
 \setmainlanguage[numerals=arabic]{greek} % κύρια γλώσσα
 \setotherlanguages{english} % δευτερεύουσα γλώσσα
 % να μην εμφανίζονται κενές παρενθέσεις όταν δεν υπάρχει ημερομηνία στην αναφορά
@@ -141,6 +143,7 @@ The abstract goes here.
 \input{introduction}
 \input{bioEnv}
 \input{methodologies}
+\input{solution}
 
 \section{Conclusion}
 The συμπέρασμα goes here.
