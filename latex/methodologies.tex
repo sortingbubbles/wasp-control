@@ -5,15 +5,31 @@
 
 Ειδικότερα, κατά την διάρκεια της επιλογής γίνεται η επιλογή γονέων και στη συνέχεια η επιβίωση. Στην επιλογή γονέων καθορίζεται ποια άτομα θα γίνουν γονείς και πόσους απογόνους θα αποκτήσουν. Οι απόγονοι δημιουργούνται με την ανταλλαγή πληροφοριών μεταξύ των γονέων και την περαιτέρω διαταραχή των απογόνων. Οι δύο παραπάνω διαδικασίες ονομάζονται ανασυνδυασμός και μετάλλαξη.
 
-Στη συνέχεια αξιολογούνται οι απόγονοι με τη χρήση της συνάρτησης ποιότητας και στο τέλος επιλέγονται τα άτομα που θα επιβιώσουν και θα περάσουν στην επόμενη γενιά. Αυτή η διαδικασία ονομάζεται εξελικτικός κύκλος (evolutionary cycle). Στο σχήμα \ref{fig_evCycl} παρουσιάζεται το διάγραμμα ροής αυτής της διαδικασίας.
+Στη συνέχεια αξιολογούνται οι απόγονοι με τη χρήση της συνάρτησης ποιότητας και στο τέλος επιλέγονται τα άτομα που θα επιβιώσουν και θα περάσουν στην επόμενη γενιά. Αυτή η διαδικασία ονομάζεται εξελικτικός κύκλος (evolutionary cycle). Στον αλγόριθμο \ref{algo_evAlg} παρουσιάζεται αυτή η διαδικασία σε μορφή ψευδοκώδικα.
 
-\begin{figure}[!t]
-    \centering
-    \def\svgwidth{2.1in}
-    \input{./figures/EvolutionaryCycle.pdf_tex}
-    \caption{Εξελικτικός κύκλος}
-    \label{fig_evCycl}
-\end{figure}
+%\begin{figure}
+%    \centering
+%    \def\svgwidth{2.1in}
+%    \input{./figures/EvolutionaryCycle.pdf_tex}
+%    \caption{Εξελικτικός κύκλος}
+%    \label{fig_evCycl}
+%\end{figure}
+
+\begin{algorithm}[!t]
+    \caption{Γενική μορφή ενός εξελικτικού αλγόριθμου}
+    \label{algo_evAlg}
+    \KwIn{populationSize, maxEvolutions}
+    \KwOut{The chromosome with the best fitness value}
+    $population \gets randomPopulation(populationSize)$\;
+    $evolutions \gets 0$\;
+    \While{$evolutions < maxEvolutions$}{
+        $parents \gets selectParents(population)$\;
+        $population \gets recombine(parents)$\;
+        $population \gets mutate(population)$\;
+        $evolutions \gets evolutions + 1$\;
+    }
+    \Return{$getBestChromosome(population)$}\;
+\end{algorithm}
 
 Το μοντέλο που χρησιμοποιείται πιο συχνά για την επίλυση προβλημάτων με την χρήση εξελικτικών αλγόριθμων είναι οι γενετικοί αλγόριθμοι, οι οποίοι αναλύονται παρακάτω.
 

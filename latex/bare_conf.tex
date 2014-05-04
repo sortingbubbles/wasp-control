@@ -83,7 +83,8 @@
 \usepackage[backend=biber, style=ieee]{biblatex} %χρησιμοποιείται για τις αναφορές
 \usepackage{xpatch} % χρησιμοποιείται για το διόρθωμα ενός bug στυλ αναφορών
 \usepackage{pgfplots} % χρησιμοποιείται για τα γραφήματα
-\usepackage[labelformat=simple]{subcaption} %χρησιμοποιείται για τα υποσχήματα
+\usepackage[labelformat=simple]{subcaption} % χρησιμοποιείται για τα υποσχήματα
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e} % χρησιμοποιείται για τους αλγόριθμους
 \usepackage{hyperref} % χρησιμοποιείται για αυτόματο linkification
 
 \pgfplotsset{compat=1.10}
@@ -110,6 +111,8 @@
 \captionsetup[table]{format=plain,labelformat=simple,justification=centering, labelsep=newline, singlelinecheck=false, textfont={sc}}
 \captionsetup[sub]{font=footnotesize,singlelinecheck=true}
 \renewcommand\thesubfigure{(\alph{subfigure})}
+
+\SetAlgorithmName{Αλγόριθμος}{αλγόριθμος}{Λίστα Αλγορίθμων} % μετάφραση της λέξης «αλγόριθμος»
 
 \addbibresource{bibliography.bib} % όρισμα αρχειού βιβλιογραφίας που θα χρησιμοποιηθεί
 
