@@ -81,10 +81,12 @@
 \usepackage[table]{xcolor} % χρησιμοποιείται για τα χρώματα στους πίνακες
 \usepackage{csquotes} % χρησιμοποιείται από το BibLaTeX
 \usepackage[backend=biber, style=ieee]{biblatex} %χρησιμοποιείται για τις αναφορές
-\usepackage{xpatch} % χρησιμοποιείται για το διόρθωμα ενός bug στυλ αναφορών
+\usepackage{xpatch} % χρησιμοποιείται για το διόρθωμα ενός bug στο στυλ αναφορών
 \usepackage{pgfplots} % χρησιμοποιείται για τα γραφήματα
+\usepackage{pgf-pie} % χρησιμοποιείται για πίτες
 \usepackage[labelformat=simple]{subcaption} % χρησιμοποιείται για τα υποσχήματα
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e} % χρησιμοποιείται για τους αλγόριθμους
+\usepackage{booktabs} % χρησιμοποιείται για όμορφους πίνακες
 \usepackage{hyperref} % χρησιμοποιείται για αυτόματο linkification
 
 \pgfplotsset{compat=1.10}
@@ -120,6 +122,9 @@
 \newfontfamily\greekfont[Script=Greek]{Times New Roman} % work-around για bug του polyglossia
 \setmainfont[Kerning=On,Mapping=tex-text]{Times New Roman} % roman font
 \renewcommand*{\bibfont}{\footnotesize} % αλλαγή του μεγέθους των αναφορών
+
+\renewcommand{\arraystretch}{1.3} % μεγαλύτερο διάστημα ανάμεσα στις γραμμές πινάκων
+
 \begin{document}
 
 % paper title
