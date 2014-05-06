@@ -98,27 +98,35 @@
 
 Μία από αυτές τις τεχνικές είναι η επιλογή ρουλέτας (roulette wheel selection) που αναφέρθηκε παραπάνω, όπου τα χρωμοσώματα καταλαμβάνουν χώρο στη «ρουλέτα» ανάλογα με την ποιότητα τους (οπότε υπάρχει μεγαλύτερη πιθανότητα να «πέσει η μπίλια» στα καλύτερα χρωμοσώματα).
 
-\begin{figure}[!t]
+\begin{figure*}[!t]
     \centering
-    \begin{tabular}{@{}crr@{}}
-        \toprule
-        Α/Α Χρωμοσώματος & Καταλληλότητα & Συνολικό ποσοστό \\ \midrule
-        1                & 40            & 14.8\%           \\
-        2                & 70            & 25.9\%           \\
-        3                & 55            & 20.4\%           \\
-        4                & 25            & 9.3\%            \\
-        5                & 60            & 22.2\%           \\
-        6                & 20            & 7.4\%            \\ \midrule
-        Σύνολο           & 270           & 100\%            \\ \bottomrule
-    \end{tabular}
-
-    \begin{tikzpicture}
-        \pie[color={black!10, black!35, black!30, black!25, black!20, black!15}, rotate=45]{14.8/1, 7.4/6, 22.2/5, 9.3/4, 20.4/3, 25.9/2}
-    \end{tikzpicture}
+    \begin{subtable}[t!]{.6\linewidth}
+        \centering
+        \begin{tabular}{@{}crr@{}}
+            \toprule
+            Α/Α Χρωμοσώματος & Καταλληλότητα & Συνολικό ποσοστό \\ \midrule
+            1                & 40            & 14.8\%           \\
+            2                & 70            & 25.9\%           \\
+            3                & 55            & 20.4\%           \\
+            4                & 25            & 9.3\%            \\
+            5                & 60            & 22.2\%           \\
+            6                & 20            & 7.4\%            \\ \midrule
+            Σύνολο           & 270           & 100\%            \\ \bottomrule
+        \end{tabular}
+        \caption{Πληθυσμός}
+    \end{subtable}
+    ~
+    \begin{subfigure}[t!]{.3\linewidth}
+        \centering
+        \begin{tikzpicture}
+            \pie[color={black!10, black!35, black!30, black!25, black!20, black!15}, rotate=45, radius=2]{14.8/1, 7.4/6, 22.2/5, 9.3/4, 20.4/3, 25.9/2}
+        \end{tikzpicture}
+        \caption{Ρουλέτα}
+    \end{subfigure}
 
     \caption{Παράδειγμα επιλογής ρουλέτας}
     \label{fig_rouletteWheel}
-\end{figure}
+\end{figure*}
 
 \subsubsection{Επιλογή Τουρνουά}
 
