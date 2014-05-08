@@ -9,7 +9,12 @@
 \begin{figure}[!t]
     \centering
     \begin{tikzpicture}
-        \begin{axis}[legend cell align = left, legend pos= south east, font=\footnotesize]
+        \begin{axis}[
+            ymin = 2300,
+            legend cell align = left,
+            legend pos = south east,
+            font = \footnotesize]
+            
             \addplot +[mark=none] table [x=a, y=b, col sep=comma] {./figures/crossoverRateFitness.csv};
             \addlegendentry{πληθ. = 50, γεν. = 5}
             \addplot +[mark=none] table [x=a, y=c, col sep=comma] {./figures/crossoverRateFitness.csv};
@@ -22,4 +27,25 @@
     \end{tikzpicture}
     \caption{Μέσος όρος καλύτερου fitness value καθώς μεγαλώνει το ποσοστό ανασυνδυασμού}
     \label{fig_crossover}
-\end{figure} 
+\end{figure}
+
+\begin{figure}[!t]
+    \centering
+    \begin{tikzpicture}
+    	\begin{axis}[
+            width = 0.8\columnwidth,
+            %height = 0.8\columnwidth,
+            colorbar,
+            legend cell align = left,
+            legend pos = north west,
+            %colormap = {whiteblack}{gray(0cm) = (1); gray(1cm) = (0)},
+            colorbar style = {title=Αριθμός Σφηκών, /tikz/.cd},
+            font = \footnotesize]
+            
+            \addplot +[scatter, only marks, point meta=explicit] table [meta=wasps, col sep=comma] {./figures/waspNests.csv};
+            \addlegendentry{Σφηκοφωλιά}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Χάρτης σφηκοφωλιών}
+    \label{fig_waspNestsMap}
+\end{figure}
