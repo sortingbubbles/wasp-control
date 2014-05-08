@@ -2,7 +2,7 @@
 
 \subsection{Ανάλυση Βιβλιοθήκης JGAP}
 
-Μια βιβλιοθήκη που επιτρέπει την ανάπτυξη εξελικτικών αλγορίθμων είναι η JGAP. Η βιβλιοθήκη αυτή έχει αναπτυχθεί στη γλώσσα Java και υποστηρίζει μεγάλη προσαρμοστικότητα χωρίς όμως αυτό να σημαίνει ότι είναι δύσκολη στη χρήση. Στην πραγματικότητα συμβαίνει το ακριβώς αντίθετο. 
+Μια βιβλιοθήκη που επιτρέπει την ανάπτυξη εξελικτικών αλγορίθμων είναι η JGAP. Η βιβλιοθήκη αυτή έχει αναπτυχθεί στη γλώσσα Java και υποστηρίζει μεγάλη προσαρμοστικότητα χωρίς όμως αυτό να σημαίνει ότι είναι δύσκολη στη χρήση. Στην πραγματικότητα συμβαίνει το ακριβώς αντίθετο.
 
 Παρέχει όλους τους βασικούς μηχανισμούς οι οποίοι μπορούν να χρησιμοποιηθούν για την εφαρμογή των εξελικτικών αρχών στις λύσεις των προβλημάτων. \cite{Meffert}
 
@@ -10,11 +10,13 @@
     \centering
     \begin{tikzpicture}
         \begin{axis}[
+            xlabel={Πιθανότητα ανασυνδυασμού},
+            ylabel={Καταλληλότητα},
             ymin = 2300,
             legend cell align = left,
             legend pos = south east,
             font = \footnotesize]
-            
+
             \addplot +[mark=none] table [x=a, y=b, col sep=comma] {./figures/crossoverRateFitness.csv};
             \addlegendentry{πληθ. = 50, γεν. = 5}
             \addplot +[mark=none] table [x=a, y=c, col sep=comma] {./figures/crossoverRateFitness.csv};
@@ -33,6 +35,8 @@
     \centering
     \begin{tikzpicture}
     	\begin{axis}[
+            xlabel={x},
+            ylabel={y},
             width = 0.8\columnwidth,
             %height = 0.8\columnwidth,
             colorbar,
@@ -41,7 +45,7 @@
             %colormap = {whiteblack}{gray(0cm) = (1); gray(1cm) = (0)},
             colorbar style = {title=Αριθμός Σφηκών, /tikz/.cd},
             font = \footnotesize]
-            
+
             \addplot +[scatter, only marks, point meta=explicit] table [meta=wasps, col sep=comma] {./figures/waspNests.csv};
             \addlegendentry{Σφηκοφωλιά}
         \end{axis}
