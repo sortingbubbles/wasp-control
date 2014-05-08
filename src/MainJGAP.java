@@ -7,8 +7,8 @@ public class MainJGAP {
     public static EvolutionMonitor m_monitor;
     private static final int MAX_ALLOWED_EVOLUTIONS = 1000;
 
-    public static double exterminate(Configuration conf, int populationSize, int maxEvolutions, MapController mapController, boolean a_doMonitor) throws Exception {
-
+    public static double[] exterminate(Configuration conf, int populationSize, int maxEvolutions, MapController mapController, boolean a_doMonitor) throws Exception {
+        double[] results = new double[maxEvolutions];
         if (a_doMonitor) {
             // Turn on monitoring/auditing of evolution progress.
             // --------------------------------------------------
@@ -61,6 +61,8 @@ public class MainJGAP {
                 population.evolve(m_monitor);
             } else {
                 population.evolve();
+                IChromosome bestSolutionSoFar = population.getFittestChromosome();
+                results[i] = bestSolutionSoFar.getFitnessValue();
             }
         }
         long endTime = System.currentTimeMillis();
@@ -68,7 +70,7 @@ public class MainJGAP {
 //                + " ms");
 
         // -----------------------------------
-        IChromosome bestSolutionSoFar = population.getFittestChromosome();
+//        IChromosome bestSolutionSoFar = population.getFittestChromosome();
 //        System.out.println("The best solution has a fitness value of " +
 //                bestSolutionSoFar.getFitnessValue());
 //        bestSolutionSoFar.setFitnessValueDirectly(-1);
@@ -77,7 +79,8 @@ public class MainJGAP {
 //        System.out.println("\t" + WaspFitnessFunction.getBombFromChromosome(bestSolutionSoFar, 1));
 //        System.out.println("\t" + WaspFitnessFunction.getBombFromChromosome(bestSolutionSoFar, 2));
 
-        return bestSolutionSoFar.getFitnessValue();
+//        return bestSolutionSoFar.getFitnessValue();
+        return results;
     }
 
     public static Configuration getConfiguration(MapController mapController, double crossoverRate, int mutationRate) throws InvalidConfigurationException {
@@ -140,26 +143,32 @@ public class MainJGAP {
         mapController.initSave(1);
         mapController.saveMap(0);
 
-        final int POPULATION_SIZE = 20;
-        final int SAMPLES = 1000;
-        final int MAX_EVOLUTIONS = 10;
+        final int POPULATION_SIZE = 1000;
+        final int SAMPLES = 100;
+        final int MAX_EVOLUTIONS = 1000;
 
-        double avg[] = new double[101];
-        for (int i = 1; i <= 100; i++) {
-            double total = 0;
-            for (int j = 0; j < SAMPLES; j++) {
-                Configuration.reset();
+        double avg[] = new double[MAX_EVOLUTIONS];
 
-                Configuration conf = getConfiguration(mapController, i/100.0, 12);
-                BestChromosomesSelector bestChromsSelector = new BestChromosomesSelector(conf, 0.90d);
-                bestChromsSelector.setDoubletteChromosomesAllowed(true);
-                conf.addNaturalSelector(bestChromsSelector, false);
+        double total[] = new double[MAX_EVOLUTIONS];
+        for (int j = 0; j < SAMPLES; j++) {
+            Configuration.reset();
 
-                total += exterminate(conf, POPULATION_SIZE, MAX_EVOLUTIONS, mapController, false);
+            Configuration conf = getConfiguration(mapController, 0.35d, 12);
+            BestChromosomesSelector bestChromsSelector = new BestChromosomesSelector(conf, 0.90d);
+            bestChromsSelector.setDoubletteChromosomesAllowed(true);
+            conf.addNaturalSelector(bestChromsSelector, false);
+
+            double results[] = exterminate(conf, POPULATION_SIZE, MAX_EVOLUTIONS, mapController, false);
+            for (int i = 0; i < MAX_EVOLUTIONS; i++) {
+                total[i] += results[i];
             }
-            avg[i] = total/SAMPLES;
+            System.out.println(j);
+        }
+        for (int i = 0; i < MAX_EVOLUTIONS; i++) {
+            avg[i] = total[i]/SAMPLES;
             System.out.println(i + "," + avg[i]);
         }
+
     }
 
     private static void crossoverRatTest(MapController mapController) throws Exception {
@@ -178,7 +187,7 @@ public class MainJGAP {
                 bestChromsSelector.setDoubletteChromosomesAllowed(true);
                 conf.addNaturalSelector(bestChromsSelector, false);
 
-                total += exterminate(conf, POPULATION_SIZE, MAX_EVOLUTIONS, mapController, false);
+                total += exterminate(conf, POPULATION_SIZE, MAX_EVOLUTIONS, mapController, false)[MAX_EVOLUTIONS-1];
             }
             avg[i] = total/SAMPLES;
             System.out.println(i + "," + avg[i]);
