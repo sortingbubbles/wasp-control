@@ -143,6 +143,41 @@ public class MainJGAP {
         mapController.initSave(1);
         mapController.saveMap(0);
 
+        final int POPULATION_SIZE = 100;
+        final int SAMPLES = 100;
+        final int MAX_EVOLUTIONS = 1000;
+
+        double avg[] = new double[MAX_EVOLUTIONS];
+
+        double total[] = new double[MAX_EVOLUTIONS];
+        for (int j = 0; j < SAMPLES; j++) {
+            Configuration.reset();
+
+            Configuration conf = getConfiguration(mapController, 0.80d, 12);
+            BestChromosomesSelector bestChromsSelector = new BestChromosomesSelector(conf, 0.90d);
+            bestChromsSelector.setDoubletteChromosomesAllowed(true);
+            conf.addNaturalSelector(bestChromsSelector, false);
+
+//            NaturalSelector weightedRouletteSelector = new WeightedRouletteSelector(conf);
+//            conf.addNaturalSelector(weightedRouletteSelector, false);
+
+//            TournamentSelector tournamentSelector = new TournamentSelector(conf, 10, 0.8);
+//            conf.addNaturalSelector(tournamentSelector, false);
+
+            double results[] = exterminate(conf, POPULATION_SIZE, MAX_EVOLUTIONS, mapController, false);
+            for (int i = 0; i < MAX_EVOLUTIONS; i++) {
+                total[i] += results[i];
+            }
+            System.out.println(j);
+        }
+        for (int i = 0; i < MAX_EVOLUTIONS; i++) {
+            avg[i] = total[i]/SAMPLES;
+            System.out.println(i + "," + avg[i]);
+        }
+
+    }
+
+    private static void averageFitness(MapController mapController) throws Exception {
         final int POPULATION_SIZE = 1000;
         final int SAMPLES = 100;
         final int MAX_EVOLUTIONS = 1000;
@@ -168,7 +203,6 @@ public class MainJGAP {
             avg[i] = total[i]/SAMPLES;
             System.out.println(i + "," + avg[i]);
         }
-
     }
 
     private static void crossoverRatTest(MapController mapController) throws Exception {
