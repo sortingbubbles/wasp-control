@@ -34,6 +34,31 @@
 \begin{figure}[!t]
     \centering
     \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={Αριθμός γενιάς},
+            ylabel={Καταλληλότητα},
+            %ymin = 2300,
+            legend cell align = left,
+            legend pos = south east,
+            font = \footnotesize]
+
+            \addplot +[mark=none] table [x=gen, y=pop20, col sep=comma] {./figures/averageFitness.csv};
+            \addlegendentry{πληθ. = 20}
+            \addplot +[mark=none] table [x=gen, y=pop50, col sep=comma] {./figures/averageFitness.csv};
+            \addlegendentry{πληθ. = 50}
+            \addplot +[mark=none] table [x=gen, y=pop100, col sep=comma] {./figures/averageFitness.csv};
+            \addlegendentry{πληθ. = 100}
+            \addplot +[mark=none] table [x=gen, y=pop1000, col sep=comma] {./figures/averageFitness.csv};
+            \addlegendentry{πληθ. = 1000}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Μέσος όρος καλύτερου fitness value ανά γενιά}
+    \label{fig_avgFitness}
+\end{figure}
+
+\begin{figure}[!t]
+    \centering
+    \begin{tikzpicture}
     	\begin{axis}[
             xlabel={x},
             ylabel={y},
@@ -52,4 +77,4 @@
     \end{tikzpicture}
     \caption{Χάρτης σφηκοφωλιών}
     \label{fig_waspNestsMap}
-\end{figure}
+\end{figure} 
