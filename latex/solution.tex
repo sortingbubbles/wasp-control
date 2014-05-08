@@ -59,6 +59,29 @@
 \begin{figure}[!t]
     \centering
     \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={Αριθμός γενιάς},
+            ylabel={Καταλληλότητα},
+            %ymin = 2300,
+            legend cell align = left,
+            legend pos = south east,
+            font = \footnotesize]
+
+            \addplot +[mark=none] table [x=gen, y=bestchrom, col sep=comma] {./figures/selectors.csv};
+            \addlegendentry{BestChromosomesSelector}
+            \addplot +[mark=none] table [x=gen, y=roulette, col sep=comma] {./figures/selectors.csv};
+            \addlegendentry{WeightedRouletteSelector}
+            \addplot +[mark=none] table [x=gen, y=tournament, col sep=comma] {./figures/selectors.csv};
+            \addlegendentry{TournamentSelector}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Μέσος όρος καλύτερου fitness value ανά γενιά}
+    \label{fig_selectorFitness}
+\end{figure}
+
+\begin{figure}[!t]
+    \centering
+    \begin{tikzpicture}
     	\begin{axis}[
             xlabel={x},
             ylabel={y},
