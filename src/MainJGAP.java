@@ -161,4 +161,27 @@ public class MainJGAP {
             System.out.println(i + "," + avg[i]);
         }
     }
+
+    private static void crossoverRatTest(MapController mapController) throws Exception {
+        final int POPULATION_SIZE = 20;
+        final int SAMPLES = 1000;
+        final int MAX_EVOLUTIONS = 10;
+
+        double avg[] = new double[101];
+        for (int i = 1; i <= 100; i++) {
+            double total = 0;
+            for (int j = 0; j < SAMPLES; j++) {
+                Configuration.reset();
+
+                Configuration conf = getConfiguration(mapController, i/100.0, 12);
+                BestChromosomesSelector bestChromsSelector = new BestChromosomesSelector(conf, 0.90d);
+                bestChromsSelector.setDoubletteChromosomesAllowed(true);
+                conf.addNaturalSelector(bestChromsSelector, false);
+
+                total += exterminate(conf, POPULATION_SIZE, MAX_EVOLUTIONS, mapController, false);
+            }
+            avg[i] = total/SAMPLES;
+            System.out.println(i + "," + avg[i]);
+        }
+    }
 }
