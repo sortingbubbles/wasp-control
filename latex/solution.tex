@@ -123,8 +123,6 @@
 
 Όπως αναφέρθηκε και πριν, το πρώτο βήμα για την ανάπτυξη ενός γενετικού αλγορίθμου σε JGAP είναι ο σχεδιασμός του χρωμοσώματος. Στο συγκεκριμένο πρόβλημα, κάθε χρωμόσωμα αποτελείται από έξι γονίδια \textemdash{} δύο γονίδια για τις συντεταγμένες της κάθε βόμβας (σχήμα \ref{fig_chromosomeStructure}).
 
-Η συνάρτηση καταλληλότητας
-
 \begin{figure}[!t]
     \centering
     \begin{tabular}{|c|c|c|c|c|c|}
@@ -136,30 +134,36 @@
     \label{fig_chromosomeStructure}
 \end{figure}
 
+Στη συνέχεια, πρέπει να οριστεί η συνάρτηση καταλληλότητας με την οποία θα αξιολογούνται τα χρωμοσώματα. Αυτό γίνεται στην κλάση στην μέθοδο evaluate της κλάσης WaspFitnessFunction. η οποία καλεί την μέθοδο getBombTotalKills(); για κάθε βόμβα και τέλος, επαναφέρει τον χάρτη στην αρχική του κατάσταση με την μέθοδο restoreMap();.
+
+Οι σημαντικότερες παράμετροι που μπορούν να ρυθμιστούν στο JGAP είναι η μέθοδος επιλογής χρωμοσώματος, η πιθανότητα που μπορεί να συμβεί ανασυνδυασμός ή μετάλλαξη και αν θα χρησιμοποιηθεί ελιτισμός ή όχι.
+
+Το JGAP προσφέρει αρκετούς τρόπους για την επιλογή των χρωμοσωμάτων. Κυριότερες από αυτές είναι ο BestChromosomesSelector που παίρνει τα καλύτερα $n$ χρωμοσώματα στην επόμενη γενιά \cite{BCS}, ο WeightedRouletteSelector που λειτουργεί όπως η επιλογή ρουλέτας που αναφέρθηκε προηγουμένως \cite{WRS}, και ο TournamentSelector που λειτουργεί με παρόμοιο τρόπο με την επιλογή τουρνουά \cite{TS}. Για να διαπιστωθεί ποιος από τους τρεις τρόπους επιλογής δίνει καλύτερα αποτελέσματα, πραγματοποιήθηκαν τρία διαφορετικά πειράματα, όπου στο κάθε πείραμα έμεινε σταθερό το μέγεθος του πληθυσμού και ο μέγιστος αριθμός γενεών (100 και 1000 αντίστοιχα), και άλλαζε ο τρόπος επιλογής του χρωμοσώματος. Το κάθε πείραμα έτρεξε 100 φορές, και μετά πάρθηκε ο μέσος όρος της καταλληλότητας του καλύτερου χρωμοσώματος ανά γενιά, για κάθε τρόπο επιλογής (σχήμα \ref{fig_selectorFitness}). Όπως φαίνεται, ο BestChromosomesSelector και TournamentSelector είχαν σχεδόν ίδιες επιδόσεις, ενώ ο WeightedRouletteSelector άργησε να συγκλίνει σε μια καλύτερη λύση.
+
 \begin{figure}[!t]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-            xlabel={Πιθανότητα ανασυνδυασμού},
+            xlabel={Αριθμός γενιάς},
             ylabel={Καταλληλότητα},
-            ymin = 2300,
+            %ymin = 2300,
             legend cell align = left,
             legend pos = south east,
             font = \footnotesize]
 
-            \addplot +[mark=none] table [x=a, y=b, col sep=comma] {./figures/crossoverRateFitness.csv};
-            \addlegendentry{πληθ. = 50, γεν. = 5}
-            \addplot +[mark=none] table [x=a, y=c, col sep=comma] {./figures/crossoverRateFitness.csv};
-            \addlegendentry{πληθ. = 50, γεν. = 10}
-            \addplot +[mark=none] table [x=a, y=d, col sep=comma] {./figures/crossoverRateFitness.csv};
-            \addlegendentry{πληθ. = 20, γεν. = 5}
-            \addplot +[mark=none] table [x=a, y=e, col sep=comma] {./figures/crossoverRateFitness.csv};
-            \addlegendentry{πληθ. = 20, γεν. = 10}
+            \addplot +[mark=none] table [x=gen, y=bestchrom, col sep=comma] {./figures/selectors.csv};
+            \addlegendentry{BestChromosomesSelector}
+            \addplot +[mark=none] table [x=gen, y=roulette, col sep=comma] {./figures/selectors.csv};
+            \addlegendentry{WeightedRouletteSelector}
+            \addplot +[mark=none] table [x=gen, y=tournament, col sep=comma] {./figures/selectors.csv};
+            \addlegendentry{TournamentSelector}
         \end{axis}
     \end{tikzpicture}
-    \caption{Μέσος όρος καλύτερου fitness value καθώς μεγαλώνει το ποσοστό ανασυνδυασμού}
-    \label{fig_crossover}
+    \caption{Μέσος όρος καλύτερου fitness value ανά γενιά}
+    \label{fig_selectorFitness}
 \end{figure}
+
+Με τον ίδιο τρόπο δοκιμάστηκε το πως επηρεάζει το μέγεθος του πληθυσμού την τιμή της καλύτερης καταλληλότητας ανά γενιά (σχήμα \ref{fig_avgFitness}). Παρατηρείται ότι όσο πιο μεγάλος ο πληθυσμός, τόσο καλύτερη λύση βρίσκεται.
 
 \begin{figure}[!t]
     \centering
@@ -186,25 +190,31 @@
     \label{fig_avgFitness}
 \end{figure}
 
+Τέλος, δοκιμάστηκε η αλλαγή της πιθανότητας του να συμβεί ανασυνδυασμός σε διάφορες ρυθμίσεις (σχήμα \ref{fig_crossover}).
+
 \begin{figure}[!t]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-            xlabel={Αριθμός γενιάς},
+            xlabel={Πιθανότητα ανασυνδυασμού},
             ylabel={Καταλληλότητα},
-            %ymin = 2300,
+            ymin = 2300,
             legend cell align = left,
             legend pos = south east,
             font = \footnotesize]
 
-            \addplot +[mark=none] table [x=gen, y=bestchrom, col sep=comma] {./figures/selectors.csv};
-            \addlegendentry{BestChromosomesSelector}
-            \addplot +[mark=none] table [x=gen, y=roulette, col sep=comma] {./figures/selectors.csv};
-            \addlegendentry{WeightedRouletteSelector}
-            \addplot +[mark=none] table [x=gen, y=tournament, col sep=comma] {./figures/selectors.csv};
-            \addlegendentry{TournamentSelector}
+            \addplot +[mark=none] table [x=a, y=b, col sep=comma] {./figures/crossoverRateFitness.csv};
+            \addlegendentry{πληθ. = 50, γεν. = 5}
+            \addplot +[mark=none] table [x=a, y=c, col sep=comma] {./figures/crossoverRateFitness.csv};
+            \addlegendentry{πληθ. = 50, γεν. = 10}
+            \addplot +[mark=none] table [x=a, y=d, col sep=comma] {./figures/crossoverRateFitness.csv};
+            \addlegendentry{πληθ. = 20, γεν. = 5}
+            \addplot +[mark=none] table [x=a, y=e, col sep=comma] {./figures/crossoverRateFitness.csv};
+            \addlegendentry{πληθ. = 20, γεν. = 10}
         \end{axis}
     \end{tikzpicture}
-    \caption{Μέσος όρος καλύτερου fitness value ανά γενιά}
-    \label{fig_selectorFitness}
+    \caption{Μέσος όρος καλύτερου fitness value καθώς μεγαλώνει το ποσοστό ανασυνδυασμού}
+    \label{fig_crossover}
 \end{figure}
+
+Αξίζει να σημειωθεί εδώ ότι η βέλτιστη λύση είναι να σκοτωθούν 3054 σφήκες\footnote{Βρέθηκε με μέθοδο εξαντλητικών δοκιμών. Ο κώδικας μπορεί να βρεθεί εδώ: https://github.com/sortingbubbles/wasp-control/tree/bruteforce}, αλλά καμία από τις λύσεις που βρέθηκαν δεν ήταν η βέλτιστη λύση (πολλές φορές όμως ήταν πολύ κοντά στην βέλτιστη). 

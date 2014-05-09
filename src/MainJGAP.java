@@ -173,9 +173,6 @@ public class MainJGAP {
      * @throws Exception
      */
     private static void crossoverRateTest(MapController mapController) throws Exception {
-        final int POPULATION_SIZE = 20;
-        final int SAMPLES = 1000;
-        final int MAX_EVOLUTIONS = 10;
 
         double avg[] = new double[101];
         for (int i = 1; i <= 100; i++) {
