@@ -3,13 +3,14 @@ public class Distance {
 
     /**
      * Υπολογίζει όλες τις πιθανές αποστάσεις. Απαιτεί πολύ μνήμη.
+     *
      * @param maxX Μήκος του χάρτη
      * @param maxY Πλάτος του χάρτη
      */
     @Deprecated
     public static void initDistance(int maxX, int maxY) {
         System.out.println("Calculating distances...");
-        distanceCache = new double[maxX+1][maxY+1][maxX+1][maxY+1];
+        distanceCache = new double[maxX + 1][maxY + 1][maxX + 1][maxY + 1];
         System.out.println(distanceCache[0][0][0][0]);
         for (int x1 = 0; x1 <= 100; x1++) {
             for (int y1 = 0; y1 <= 100; y1++) {
@@ -28,6 +29,7 @@ public class Distance {
 
     /**
      * Υπολογίζει την απόσταση μεταξύ δύο σημείων
+     *
      * @param x1 Η τετμημένη του πρώτου σημείου
      * @param y1 Η τεταγμένη του πρώτου σημείου
      * @param x2 Η τετμημένη του δεύτερου σημείου
@@ -44,6 +46,7 @@ public class Distance {
 
     /**
      * Υπολογίζει την απόσταση μεταξύ δύο σημείων
+     *
      * @param point1 Το πρώτο σημείο
      * @param point2 Το δεύτερο σημείο
      * @return Την απόσταση των σημείων {@code point1} με {@code point2}
