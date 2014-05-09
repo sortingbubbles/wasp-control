@@ -1,14 +1,24 @@
 public class Distance {
     private static double[][][][] distanceCache;
 
+    /**
+     * Υπολογίζει όλες τις πιθανές αποστάσεις. Απαιτεί πολύ μνήμη.
+     * @param maxX Μήκος του χάρτη
+     * @param maxY Πλάτος του χάρτη
+     */
+    @Deprecated
     public static void initDistance(int maxX, int maxY) {
         System.out.println("Calculating distances...");
         distanceCache = new double[maxX+1][maxY+1][maxX+1][maxY+1];
+        System.out.println(distanceCache[0][0][0][0]);
         for (int x1 = 0; x1 <= 100; x1++) {
             for (int y1 = 0; y1 <= 100; y1++) {
                 for (int x2 = 0; x2 <= 100; x2++) {
                     for (int y2 = 0; y2 <= 100; y2++) {
-                        distanceCache[x1][y1][x2][y2] = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+                        if (distanceCache[x2][y2][x1][y1] == 0) {
+                            distanceCache[x1][y1][x2][y2] = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+                            distanceCache[x2][y2][x1][y1] = distanceCache[x1][y1][x2][y2];
+                        }
                     }
                 }
             }
@@ -28,7 +38,8 @@ public class Distance {
 //        if (distanceCache[x1][y1][x2][y2] == 0) {
 //            distanceCache[x1][y1][x2][y2] = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 //        }
-        return distanceCache[x1][y1][x2][y2];
+//        return distanceCache[x1][y1][x2][y2];
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
     /**
