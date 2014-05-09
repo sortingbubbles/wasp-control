@@ -42,6 +42,7 @@ public class WaspNest implements ICoordinates {
     /**
      * Αφαιρεί το {@code killedWasps} από τον αριθμό των σφηκών που έχει η φωλιά.
      * Εάν το αποτέλεσμα είναι μικρότερο του 0 τότε η φωλιά έχει 0 σφήκες.
+     *
      * @param killedWasps Ο αριθμός των σφηκών που θα αφαιρεθούν
      */
     public void killWasps(int killedWasps) {
