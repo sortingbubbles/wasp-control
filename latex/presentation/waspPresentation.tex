@@ -159,18 +159,27 @@
 
 \section{Βιολογικό Υπόβαθρο}
 
-\subsection{Ο Παππούλης μας ο Κάρολος}
+\subsection{Η Θεωρία της Εξέλιξης}
 
 \begin{frame}
-\frametitle{Ο Παππούλης μας ο Κάρολος}
-Τι είναι;
+\frametitle{Η Θεωρία της Εξέλιξης}
+\begin{itemize}
+  \item Η ικανότητα των οργανισμών να προσαρμόζονται στις αλλαγές του περιβάλλοντος και να αποκτούν απογόνους.
+  \item Οι αποκλίσεις στους φαινότυπους των οργανισμών.
+\end{itemize}
 \end{frame}
 
 \subsection{Βιολογικά Χαρακτηριστικά}
 
 \begin{frame}
 \frametitle{Βιολογικά Χαρακτηριστικά}
-Τι είναι;
+    \begin{itemize}
+      \item Γονίδια
+      \item Alleles
+      \item Χρωμόσωμα
+      \item Γονότυπος
+      \item Φαινότυπος      
+    \end{itemize}
 \end{frame}
 
 \section{Μοντέλα Εξελικτικών Αλγορίθμων}
@@ -263,21 +272,35 @@
 
 \begin{frame}
 \frametitle{Παράλληλοι Γενετικοί Αλγόριθμοι}
-Τι είναι;
+\begin{itemize}
+  \item Coarse Grain 
+  \item Fine Grain
+\end{itemize}
 \end{frame}
 
 \subsection{Εξελικτικές Στρατηγικές}
 
 \begin{frame}
 \frametitle{Εξελικτικές Στρατηγικές}
-Τι είναι;
+\begin{itemize}
+  \item Προτάθηκαν στις αρχές του '60 από τους Ingo Rechenberg και Hans-Paul Schewefel.
+  \item Αφορούν την επίλυση τεχνικών προβλημάτων βελτιστοποίησης.
+  \item Χρησιμοποιούν μόνο τελεστές μετάλλαξης.
+  \item Στην απλή της μορφή κάθε γονέας δημιουργεί έναν απόγονο για κάθε γενιά.
+\end{itemize}
 \end{frame}
 
 \subsection{Γενετικός Προγραμματισμός}
 
 \begin{frame}
 \frametitle{Γενετικός Προγραμματισμός}
-Τι είναι;
+\begin{itemize}
+  \item Αναζήτηση του αλγορίθμου που αρμόζει στην επίλυση ενός προβλήματος.
+  \item Εξέλιξη του αλγορίθμου που λύνει το πρόβλημα.
+  \item Σημαντική ενίσχυση από τον John Koza το '90.  
+  \item Προγράμματα == Δεδομένα.
+  \item Εφαρμογή τελεστών διασταύρωσης και μετάλλαξης.
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
@@ -286,7 +309,28 @@
 
 \begin{frame}
 \frametitle{Παρουσίαση του προβλήματος}
-Τι είναι;
+\begin{figure}[!t]
+    \centering
+    \begin{tikzpicture}
+    	\begin{axis}[
+            xlabel={x},
+            ylabel={y},
+            width = 0.6\columnwidth,
+            %height = 0.8\columnwidth,
+            colorbar,
+            legend cell align = left,
+            legend pos = north west,
+            %colormap = {whiteblack}{gray(0cm) = (1); gray(1cm) = (0)},
+            colorbar style = {title=Αριθμός Σφηκών, /tikz/.cd},
+            font = \footnotesize]
+
+            \addplot +[scatter, only marks, point meta=explicit] table [meta=wasps, col sep=comma] {../figures/waspNests.csv};
+            \addlegendentry{Σφηκοφωλιά}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Χάρτης σφηκοφωλιών}
+    \label{fig_waspNestsMap}
+\end{figure}
 \end{frame}
 
 %------------------------------------------------
@@ -297,14 +341,23 @@
 
 \begin{frame}
 \frametitle{Βήματα υλοποίησης}
-Τι είναι;
+\begin{enumerate}
+  \item Σχεδιασμός χρωμοσώματος
+  \item Υλοποίηση συνάρτησης καταλληλότητας
+  \item Ορισμός των παραμέτρων
+  \item Δημιουργία ενός πληθυσμού από υποψήφιες λύσεις
+  \item Εξέλιξη του πληθυσμού
+\end{enumerate}
 \end{frame}
 
 \subsection{Ανάλυση Προβλήματος}
 
 \begin{frame}
 \frametitle{Ανάλυση Προβλήματος}
-Τι είναι;
+\begin{itemize}
+  \item Πρόβλημα μεγιστοποίησης -> Αύξηση αριθμού εξοντωμένων σφηκών
+  \item Πρόβλημα ελαχιστοποίησης -> Μείωση του αριθμού των σφηκών που απομένουν στη σοφίτα
+\end{itemize}
 \end{frame}
 
 \subsection{Περιγραφή Λύσης}
