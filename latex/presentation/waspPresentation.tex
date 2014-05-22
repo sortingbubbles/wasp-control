@@ -167,7 +167,7 @@
 \begin{frame}
 \frametitle{Η Θεωρία της Εξέλιξης}
 \begin{itemize}
-  \item Η ικανότητα των οργανισμών να προσαρμόζονται στις αλλαγές του περιβάλλοντος και να αποκτούν απογόνους.
+  \item Η ικανότητα των οργανισμών να προσαρμόζονται στις αλλαγές του περιβάλλοντος και να αποκτούν απογόνους.\pause
   \item Οι αποκλίσεις στους φαινότυπους των οργανισμών.
 \end{itemize}
 \end{frame}
@@ -177,10 +177,10 @@
 \begin{frame}
 \frametitle{Βιολογικά Χαρακτηριστικά}
     \begin{itemize}
-      \item Γονίδια
-      \item Alleles
-      \item Χρωμόσωμα
-      \item Γονότυπος
+      \item Γονίδια\pause
+      \item Alleles\pause
+      \item Χρωμόσωμα\pause
+      \item Γονότυπος\pause
       \item Φαινότυπος
     \end{itemize}
 \end{frame}
@@ -191,6 +191,7 @@
 
 \begin{frame}
 \frametitle{Γενική μορφή ΕΑ}
+\centering
 \begin{algorithm}[H]
     $population \gets randomPopulation(populationSize)$\;
     $evolutions \gets 0$\;
@@ -250,35 +251,49 @@
 
 \begin{frame}
 \frametitle{Επιλογή Τουρνουά}
-Τι είναι;
+\begin{itemize}
+  \item Δημιουργία ενός τυχαίου υποσυνόλου k από τον αρχικό πληθυσμό.\pause
+  \item Επιλογή του καλύτερου χρωμοσώματος από αυτό το υποσύνολο (pool).
+\end{itemize}
 \end{frame}
 
 \subsubsection*{Ελιτισμός}
 
 \begin{frame}
 \frametitle{Ελιτισμός}
-Τι είναι;
+Tα άτομα με την μεγαλύτερη καταλληλότητα συνεχίζουν στην επόμενη γενιά χωρίς να υποστούν καμία αλλαγή.
 \end{frame}
 
 \subsection{Αναπαραγωγή των Γονέων}
 
 \begin{frame}
 \frametitle{Αναπαραγωγή των Γονέων}
-Τι είναι;
 \end{frame}
 
 \subsubsection{Διασταύρωση Ενός Σημείου}
 
 \begin{frame}
 \frametitle{Διασταύρωση Ενός Σημείου}
-Τι είναι;
+\begin{figure}[!t]
+    \centering
+    \def\svgwidth{3.2in}
+    \input{./images/OnePointCrossover.pdf_tex}
+    \caption{Διασταύρωση ενός σημείου}
+    \label{fig_opc}
+\end{figure}
 \end{frame}
 
 \subsubsection{Διασταύρωση Δύο Σημείων}
 
 \begin{frame}
 \frametitle{Διασταύρωση Δύο Σημείων}
-Τι είναι;
+\begin{figure}[!t]
+    \centering
+    \def\svgwidth{3.2in}
+    \input{./images/TwoPointCrossover.pdf_tex}
+    \caption{Διασταύρωση δύο σημείων}
+    \label{fig_tpc}
+\end{figure}
 \end{frame}
 
 \subsubsection{Μετάλλαξη}
@@ -362,10 +377,10 @@
 \begin{frame}
 \frametitle{Βήματα υλοποίησης}
 \begin{enumerate}
-  \item Σχεδιασμός χρωμοσώματος
-  \item Υλοποίηση συνάρτησης καταλληλότητας
-  \item Ορισμός των παραμέτρων
-  \item Δημιουργία ενός πληθυσμού από υποψήφιες λύσεις
+  \item Σχεδιασμός χρωμοσώματος\pause
+  \item Υλοποίηση συνάρτησης καταλληλότητας\pause
+  \item Ορισμός των παραμέτρων\pause
+  \item Δημιουργία ενός πληθυσμού από υποψήφιες λύσεις\pause
   \item Εξέλιξη του πληθυσμού
 \end{enumerate}
 \end{frame}
@@ -384,7 +399,16 @@
 
 \begin{frame}
 \frametitle{Περιγραφή Λύσης}
-Τι είναι;
+\begin{figure}[!t]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        $x_1$ & $y_1$ & $x_2$ & $y_2$ & $x_3$ & $y_3$\\
+        \hline
+    \end{tabular}
+    \caption{Δομή χρωμοσώματος}
+    \label{fig_chromosomeStructure}
+\end{figure}
 \end{frame}
 
 \subsection{Σύγκριση Αποτελεσμάτων}
@@ -392,34 +416,95 @@
 \subsubsection{Σύγκριση με τη Βέλτιστη Λύση}
 \begin{frame}
 \frametitle{Σύγκριση με τη Βέλτιστη Λύση}
-Τι είναι;
+
 \end{frame}
 
 \subsubsection{Σύγκριση Μεθόδου Επιλογής}
 \begin{frame}
 \frametitle{Σύγκριση Μεθόδου Επιλογής}
-Τι είναι;
+ \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            scale=0.8,
+            xlabel={Αριθμός γενιάς},
+            ylabel={Καταλληλότητα},
+            %ymin = 2300,
+            legend cell align = left,
+            legend pos = south east,
+            font = \footnotesize]
+
+            \addplot +[mark=none] table [x=gen, y=pop20, col sep=comma] {../figures/averageFitness.csv};
+            \addlegendentry{πληθ. = 20}
+            \addplot +[mark=none] table [x=gen, y=pop50, col sep=comma] {../figures/averageFitness.csv};
+            \addlegendentry{πληθ. = 50}
+            \addplot +[mark=none] table [x=gen, y=pop100, col sep=comma] {../figures/averageFitness.csv};
+            \addlegendentry{πληθ. = 100}
+            \addplot +[mark=none] table [x=gen, y=pop1000, col sep=comma] {../figures/averageFitness.csv};
+            \addlegendentry{πληθ. = 1000}
+        \end{axis}
+    \end{tikzpicture}
 \end{frame}
 
 \subsubsection{Σύγκριση Μεγέθους Πληθυσμού}
 
 \begin{frame}
 \frametitle{Σύγκριση Μεγέθους Πληθυσμού}
-Τι είναι;
+\centering
+ \begin{tikzpicture}
+        \begin{axis}[
+            scale=0.8,
+            xlabel={Αριθμός γενιάς},
+            ylabel={Καταλληλότητα},
+            %ymin = 2300,
+            legend cell align = left,
+            legend pos = south east,
+            font = \footnotesize]
+            \addplot +[mark=none] table [x=gen, y=bestchrom, col sep=comma] {../figures/selectors.csv};
+            \addlegendentry{BestChromosomesSelector}
+            \addplot +[mark=none] table [x=gen, y=roulette, col sep=comma] {../figures/selectors.csv};
+            \addlegendentry{WeightedRouletteSelector}
+            \addplot +[mark=none] table [x=gen, y=tournament, col sep=comma] {../figures/selectors.csv};
+            \addlegendentry{TournamentSelector}
+        \end{axis}
+    \end{tikzpicture}
 \end{frame}
 
 \subsubsection{Σύγκριση βάσει ποσοστού ανασυνδυασμού}
 
 \begin{frame}
 \frametitle{Σύγκριση βάσει ποσοστού ανασυνδυασμού}
-Τι είναι;
+\centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            scale=0.8,
+            xlabel={Πιθανότητα ανασυνδυασμού},
+            ylabel={Καταλληλότητα},
+            ymin = 2000,
+            legend cell align = left,
+            legend pos = south east,
+            font = \footnotesize]
+
+            \addplot +[mark=none] table [x=a, y=b, col sep=comma] {../figures/crossoverRateFitness.csv};
+            \addlegendentry{πληθ. = 50, γεν. = 5}
+            \addplot +[mark=none] table [x=a, y=c, col sep=comma] {../figures/crossoverRateFitness.csv};
+            \addlegendentry{πληθ. = 50, γεν. = 10}
+            \addplot +[mark=none] table [x=a, y=d, col sep=comma] {../figures/crossoverRateFitness.csv};
+            \addlegendentry{πληθ. = 20, γεν. = 5}
+            \addplot +[mark=none] table [x=a, y=e, col sep=comma] {../figures/crossoverRateFitness.csv};
+            \addlegendentry{πληθ. = 20, γεν. = 10}
+        \end{axis}
+    \end{tikzpicture}
 \end{frame}
 
 \section{Συμπέρασμα}
 
 \begin{frame}
 \frametitle{Συμπέρασμα}
-Τι είναι;
+\begin{itemize}
+  \item Γρήγορη επίλυση πολύπλοκων προβλημάτων\pause
+  \item Μεγάλη προσαρμοστικότητα\pause
+  \item Χώρος για βελτίωση
+\end{itemize}
 \end{frame}
 
 
