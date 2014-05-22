@@ -108,11 +108,14 @@
 \usepgfplotslibrary{groupplots}
 \usetikzlibrary{pgfplots.groupplots}
 \usepackage{xcolor} % For colors
+\usepackage[linesnumbered,vlined]{algorithm2e} % χρησιμοποιείται για τους αλγόριθμους
 
 \pgfplotsset{compat=1.10}
 
 \setmainlanguage[numerals=arabic]{greek} % κύρια γλώσσα
 \setotherlanguages{english} % δευτερεύουσα γλώσσα
+
+\SetAlFnt{\small}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -178,7 +181,7 @@
       \item Alleles
       \item Χρωμόσωμα
       \item Γονότυπος
-      \item Φαινότυπος      
+      \item Φαινότυπος
     \end{itemize}
 \end{frame}
 
@@ -188,7 +191,24 @@
 
 \begin{frame}
 \frametitle{Γενική μορφή ΕΑ}
-Τι είναι;
+\begin{algorithm}[H]
+    $population \gets randomPopulation(populationSize)$\;
+    $evolutions \gets 0$\;
+    \While{$evolutions < maxEvolutions$}{
+        $parents \gets selectParents(population)$\;
+        $population \gets recombine(parents)$\;
+        $population \gets mutate(population)$\;
+        $evolutions \gets evolutions + 1$\;
+    }
+    \Return{$getBestChromosome(population)$}\;
+\end{algorithm}
+%\begin{enumerate}
+%  \item Δημιουργία πληθυσμού
+%  \item Επιλογή γονέων
+%  \item Ανασυνδυασμός γονέων
+%  \item Μετάλλαξη γονέων
+%  \item
+%\end{enumerate}
 \end{frame}
 
 \subsection{Γενετικοί Αλγόριθμοι}
@@ -273,7 +293,7 @@
 \begin{frame}
 \frametitle{Παράλληλοι Γενετικοί Αλγόριθμοι}
 \begin{itemize}
-  \item Coarse Grain 
+  \item Coarse Grain
   \item Fine Grain
 \end{itemize}
 \end{frame}
@@ -297,7 +317,7 @@
 \begin{itemize}
   \item Αναζήτηση του αλγορίθμου που αρμόζει στην επίλυση ενός προβλήματος.
   \item Εξέλιξη του αλγορίθμου που λύνει το πρόβλημα.
-  \item Σημαντική ενίσχυση από τον John Koza το '90.  
+  \item Σημαντική ενίσχυση από τον John Koza το '90.
   \item Προγράμματα == Δεδομένα.
   \item Εφαρμογή τελεστών διασταύρωσης και μετάλλαξης.
 \end{itemize}
