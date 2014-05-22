@@ -100,6 +100,7 @@
 
 \setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
 }
+\setbeamertemplate{caption}{\insertcaption}
 
 \usepackage{polyglossia} % χρησιμοποιείται για καλύτερη υποστήριξη των Ελληνικών
 \usepackage{graphicx} % Allows including images
@@ -109,6 +110,7 @@
 \usetikzlibrary{pgfplots.groupplots}
 \usepackage{xcolor} % For colors
 \usepackage[linesnumbered,vlined]{algorithm2e} % χρησιμοποιείται για τους αλγόριθμους
+\usepackage{pgf-pie} % χρησιμοποιείται για πίτες
 
 \pgfplotsset{compat=1.10}
 
@@ -132,8 +134,8 @@
 }
 \date{23 Μαΐου 2014} % Date, can be changed to a custom date
 
-\newfontfamily\greekfont[Script=Greek]{Linux Libertine G} % work-around για bug του polyglossia
-\setmainfont[Kerning=On,Mapping=tex-text]{Linux Libertine G} % roman font
+\newfontfamily\greekfont[Script=Greek]{Linux Libertine O} % work-around για bug του polyglossia
+\setmainfont[Kerning=On,Mapping=tex-text]{Linux Libertine O} % roman font
 
 \begin{document}
 
@@ -215,20 +217,43 @@
 
 \begin{frame}
 \frametitle{Γενετικοί Αλγόριθμοι}
-Τι είναι;
+\begin{itemize}
+  \item «Γεννήθηκαν» την δεκαετία του '60 από τον John Holland\pause
+  \item Είναι μια κλάση από αλγορίθμους αναζήτησης, βασισμένοι στη βιολογική εξέλιξη\pause
+  \item Ακολουθούν μια επαναληπτική διαδικασία, και κάθε επανάληψη ονομάζεται γενιά
+\end{itemize}
 \end{frame}
 
 \subsection{Τρόποι Αναπαράστασης}
 
 \begin{frame}
 \frametitle{Τρόποι Αναπαράστασης}
-Τι είναι;
+\begin{itemize}
+  \item Πιο συνηθισμένος τρόπος αναπαράστασης: bit string
+  \begin{figure}
+    \renewcommand{\arraystretch}{1.3}
+    \label{fig_bit_string}
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c|c}
+        \hline
+        \ldots & 0 & 0 & 1 & 0 & 1 & 1 & \ldots\\
+        \hline
+    \end{tabular}
+    \caption{Παράδειγμα bit string}
+  \end{figure}
+  \item Μεταθέσεις
+  \item Δεντρική δομή
+\end{itemize}
 \end{frame}
 
 \subsection{Δημιουργία και Αξιολόγηση Πληθυσμού}
 
 \begin{frame}
 \frametitle{Δημιουργία και Αξιολόγηση Πληθυσμού}
+\begin{itemize}
+  \item Δημιουργούνται $N$ τυχαία σταθερού-μήκους bit string
+  \item Η αξιολόγηση γίνεται με τη συνάρτηση καταλληλότητας
+\end{itemize}
 Τι είναι;
 \end{frame}
 
@@ -236,14 +261,45 @@
 
 \begin{frame}
 \frametitle{Επιλογή Γονέων}
-Τι είναι;
+\begin{itemize}
+  \item Μετά την αξιολόγηση, πρέπει να επιλεχθούν τα χρωμοσώματα που θα γίνουν γονείς.
+  \item Τα χρωμοσώματα που δίνουν καλύτερη λύση στο πρόβλημα πρέπει να έχουν περισσότερες πιθανότητες να επιλεχθούν
+  \item Υπάρχουν διάφορες τεχνικές για την επιλογή
+\end{itemize}
 \end{frame}
 
 \subsubsection*{Επιλογή Ρουλέτας}
 
 \begin{frame}
 \frametitle{Επιλογή Ρουλέτας}
-Τι είναι;
+\begin{tiny}
+\begin{table}
+    \centering
+    \begin{tabular}{@{}crrrr@{}}
+        \toprule
+        Α/Α Χρωμοσώματος & Καταλληλότητα & Συνολικό ποσοστό & Κατάταξη & Ποσοστό κατάταξης \\ \midrule
+        1                & 40            & 14.8\%           & 4        & 19\%              \\
+        2                & 110           & 40.7\%           & 6        & 28.5\%            \\
+        3                & 30            & 11.1\%           & 3        & 14.3\%            \\
+        4                & 25            & 9.3\%            & 2        & 9.6\%             \\
+        5                & 45            & 16.7\%           & 5        & 23.8\%            \\
+        6                & 20            & 7.4\%            & 1        & 4.8\%             \\ \midrule
+        Σύνολο           & 270           & 100\%            &          & 100\%             \\ \bottomrule
+    \end{tabular}
+    \caption{Πληθυσμός}
+\end{table}
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \pie[rotate=45, radius=1]{14.8/1, 7.4/6, 16.7/5, 9.3/4, 11.1/3, 40.7/2}
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \pie[rotate=45, radius=1]{19/1, 4.8/6, 23.8/5, 9.6/4, 14.3/3, 28.5/2}
+    \end{tikzpicture}
+    
+    \caption{Ποσοστά καταλληλότητας και κατάταξης}
+\end{figure}
+\end{tiny}
 \end{frame}
 
 \subsubsection*{Επιλογή Τουρνουά}
@@ -264,7 +320,7 @@
 
 \begin{frame}
 \frametitle{Αναπαραγωγή των Γονέων}
-Τι είναι;
+Μετά την επιλογή, θα πρέπει να εφαρμοστεί ένας ή περισσότεροι τελεστές για τη δημιουργία των χρωμοσωμάτων-παιδιών
 \end{frame}
 
 \subsubsection{Διασταύρωση Ενός Σημείου}
@@ -285,7 +341,22 @@
 
 \begin{frame}
 \frametitle{Μετάλλαξη}
-Τι είναι;
+Επιλέγεται τυχαία ένα bit από το χρωμόσωμα, και αυτό αντιστρέφεται.
+
+\begin{figure}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        1 & 0 & 0 & 0\\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        1 & 0 & 1 & 0\\
+        \hline
+    \end{tabular}
+    \caption{Μετάλλαξη ενός χρωμοσώματος}
+    \label{fig_mutation}
+\end{figure}
 \end{frame}
 
 \subsection{Παράλληλοι Γενετικοί Αλγόριθμοι}
