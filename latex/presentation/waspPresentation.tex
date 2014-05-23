@@ -132,6 +132,7 @@
 \medskip
 \textit{\{achatsat, mkosm\}@it.teithe.gr} % Your email address
 }
+\titlegraphic{\includegraphics[height=2.3cm]{images/evolution.jpg} }
 \date{23 Μαΐου 2014} % Date, can be changed to a custom date
 
 \newfontfamily\greekfont[Script=Greek]{Linux Libertine O} % work-around για bug του polyglossia
@@ -167,7 +168,11 @@
 \subsection{Η Θεωρία της Εξέλιξης}
 
 \begin{frame}
+
 \frametitle{Η Θεωρία της Εξέλιξης}
+\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=north west,xshift=75pt] at (current page.north west) {\includegraphics[height=3cm]{images/charles2.jpg}};
+\end{tikzpicture}
 \begin{itemize}
   \item Η ικανότητα των οργανισμών να προσαρμόζονται στις αλλαγές του περιβάλλοντος και να αποκτούν απογόνους.\pause
   \item Οι αποκλίσεις στους φαινότυπους των οργανισμών.
@@ -178,6 +183,9 @@
 
 \begin{frame}
 \frametitle{Βιολογικά Χαρακτηριστικά}
+\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=north east,yshift=-120pt, xshift=-40] at (current page.north east) {\includegraphics[height=3cm]{images/chromo.jpg}};
+\end{tikzpicture}
     \begin{itemize}
       \item Γονίδια\pause
       \item Alleles\pause
@@ -255,7 +263,6 @@
   \item Δημιουργούνται $N$ τυχαία σταθερού-μήκους bit string
   \item Η αξιολόγηση γίνεται με τη συνάρτηση καταλληλότητας
 \end{itemize}
-Τι είναι;
 \end{frame}
 
 \subsection{Επιλογή Γονέων}
